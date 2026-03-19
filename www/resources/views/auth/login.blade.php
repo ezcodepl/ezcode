@@ -1,55 +1,40 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
-    <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
+<div class="min-h-screen bg-gradient-to-b from-[#1f2937] via-[#111827] to-[#0f172a] flex flex-col">
+    
 
-        <h1 class="text-2xl font-bold mb-4 text-center">Logowanie</h1>
+    <main class="flex-grow flex items-center justify-center px-6">
+        <div class="bg-gray-900 bg-opacity-90 rounded-lg shadow-lg max-w-md w-full p-8">
+            <h1 class="text-white text-3xl font-semibold mb-6 text-center">Zaloguj się</h1>
 
-        <!-- Session Status -->
-        @if (session('status'))
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ session('status') }}
-            </div>
-        @endif
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
 
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
-
-            <!-- Email -->
-            <div class="mb-4">
-                <label for="email" class="block font-medium text-sm text-gray-700 dark:text-gray-300">Email</label>
+                <label for="email" class="block mb-2 text-gray-300 font-medium">Email</label>
                 <input id="email" type="email" name="email" required autofocus
-                    class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full">
-            </div>
+                    class="w-full mb-4 px-4 py-3 rounded bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500">
 
-            <!-- Password -->
-            <div class="mb-4">
-                <label for="password" class="block font-medium text-sm text-gray-700 dark:text-gray-300">Hasło</label>
-                <input id="password" type="password" name="password" required autocomplete="current-password"
-                    class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full">
-            </div>
+                <label for="password" class="block mb-2 text-gray-300 font-medium">Hasło</label>
+                <input id="password" type="password" name="password" required
+                    class="w-full mb-4 px-4 py-3 rounded bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500">
 
-            <!-- Remember Me -->
-            <div class="block mb-4">
-                <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox" name="remember"
-                        class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600">
-                    <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">Zapamiętaj mnie</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end">
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 mr-4" href="{{ route('password.request') }}">
-                    Zapomniałeś hasła?
-                </a>
+                <div class="flex items-center justify-between mb-4">
+                    <label class="inline-flex items-center text-gray-400">
+                        <input type="checkbox" name="remember" class="rounded text-cyan-500 focus:ring-cyan-400">
+                        <span class="ml-2">Zapamiętaj mnie</span>
+                    </label>
+                    <a href="{{ route('password.request') }}" class="text-cyan-400 hover:underline text-sm">Zapomniałeś hasła?</a>
+                </div>
 
                 <button type="submit"
-                    class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition">
+                    class="w-full bg-cyan-500 hover:bg-cyan-600 transition-colors rounded py-3 font-semibold text-white">
                     Zaloguj się
                 </button>
-            </div>
-        </form>
-    </div>
+            </form>
+        </div>
+    </main>
+
+   
 </div>
 @endsection

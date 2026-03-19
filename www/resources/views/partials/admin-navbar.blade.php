@@ -9,19 +9,30 @@
                     <span class="font-heading font-bold text-xl tracking-tight text-white">ez<span class="text-brand">Code</span></span>
                 </a>
 
-                <nav class="hidden md:flex items-center space-x-8">
-                    <a href="{{ url('/o-mnie') }}" class="text-sm font-medium text-slate-300 hover:text-brand transition-colors">O mnie</a>
-                    <a href="{{ url('/oferta') }}" class="text-sm font-medium text-slate-300 hover:text-brand transition-colors">Oferta</a>
-                    <a href="{{ url('/projekty') }}" class="text-sm font-medium text-slate-300 hover:text-brand transition-colors">Projekty</a>
-					<a href="{{ url('/blog') }}" class="text-sm font-medium text-slate-300 hover:text-brand transition-colors">Blog</a>
-                    
-                    <form method="POST" action="{{ route('admin.logout') }}">
-                        @csrf
-                        <button type="submit" class="bg-brand hover:bg-brand-dark text-white px-6 py-2 rounded-full text-sm font-medium transition-all shadow-lg shadow-brand/25">
-                            Wyloguj
-                        </button>
-                    </form>
-                </nav>
+               <nav class="hidden md:flex items-center space-x-8">
+
+    @guest
+        <a href="{{ url('/o-mnie') }}" class="text-sm font-medium text-slate-300 hover:text-brand transition-colors">O mnie</a>
+        <a href="{{ url('/oferta') }}" class="text-sm font-medium text-slate-300 hover:text-brand transition-colors">Oferta</a>
+        <a href="{{ url('/projekty') }}" class="text-sm font-medium text-slate-300 hover:text-brand transition-colors">Projekty</a>
+        <a href="{{ url('/blog') }}" class="text-sm font-medium text-slate-300 hover:text-brand transition-colors">Blog</a>
+        <a href="{{ route('login') }}" class="text-sm font-medium text-slate-300 hover:text-brand transition-colors">Logowanie</a>
+    @endguest
+
+    @auth
+        <a href="{{ url('/admin/posts') }}" class="text-sm font-medium text-slate-300 hover:text-brand transition-colors">Posty</a>
+        <a href="{{ url('/portfolio') }}" class="text-sm font-medium text-slate-300 hover:text-brand transition-colors">Portfolio</a>
+        <a href="{{ url('/profile') }}" class="text-sm font-medium text-slate-300 hover:text-brand transition-colors">Profil</a>
+
+        <form method="POST" action="{{ route('admin.logout') }}">
+            @csrf
+            <button type="submit" class="bg-brand hover:bg-brand-dark text-white px-6 py-2 rounded-full text-sm font-medium transition-all shadow-lg shadow-brand/25">
+                Wyloguj
+            </button>
+        </form>
+    @endauth
+
+</nav>
 
                 <button id="mobile-menu-btn" class="md:hidden text-slate-300 p-2">
                     <i class="fa-solid fa-bars text-2xl"></i>
