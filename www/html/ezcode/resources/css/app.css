@@ -1,0 +1,102 @@
+@import 'tailwindcss';
+
+:root {
+  --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Global */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #0f172a;
+  color: #f8fafc;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', sans-serif;
+}
+.code-font {
+  font-family: 'Fira Code', monospace;
+}
+
+/* Gradient Hero */
+.hero-gradient {
+  background: radial-gradient(circle at top right, rgba(14, 165, 233, 0.12), transparent 40%),
+              radial-gradient(circle at bottom left, rgba(139, 92, 246, 0.1), transparent 40%);
+}
+
+/* Glass Nav */
+.glass-nav {
+  background: rgba(10, 15, 29, 0.8);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Skill Tag */
+.skill-tag {
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 4px 16px;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  color: #94a3b8;
+  transition: all 0.3s ease;
+}
+.skill-tag:hover {
+  border-color: #0ea5e9;
+  color: #fff;
+  background: rgba(14, 165, 233, 0.1);
+}
+
+/* Progress Bar Glow */
+.progress-bar-glow {
+  box-shadow: 0 0 8px rgba(14, 165, 233, 0.4);
+}
+
+/* Offer Card */
+.offer-card {
+  background: #1e293b;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+.offer-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(14, 165, 233, 0.3);
+}
+
+/* Project Card */
+.project-card {
+  background: #1e293b;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2rem;
+  transition: all 0.4s ease;
+}
+.project-card:hover {
+  border-color: rgba(14, 165, 233, 0.4);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+/* Slider */
+.slide {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5%;
+  position: relative;
+  animation: fadeIn 0.8s ease-in-out;
+}
+.slide.active {
+  display: flex;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
