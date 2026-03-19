@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'ezCode - Full Stack Developer')</title>
-
+<script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -24,7 +24,6 @@
             }
         }
     </script>
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -65,33 +64,93 @@
     @include('partials.admin-footer')
 
     @stack('scripts')
-    
-   <script>
-document.addEventListener('DOMContentLoaded', function() {
-    if (typeof tinymce !== 'undefined') {
-        tinymce.init({
-            selector: 'textarea#content',
-            plugins: 'image link media table code lists',
-            toolbar: 'undo redo | styles | bold italic | alignleft aligncenter alignright | bullist numlist | link image media | code',
-            height: 400,
-            menubar: false,
-            
-            // ===== DARK / TRANSPARENT STYLE =====
-            skin: 'oxide-dark', // wbudowana ciemna skórka
-            content_css: 'dark', // wbudowany dark content CSS
-            // jeśli chcesz w pełni transparent, można nadpisać poniżej
-            content_style: "body { background-color: transparent; color: #f8fafc; font-family: 'Inter', sans-serif; }",
-            
-            images_upload_url: '{{ route("admin.posts.uploadImage") }}',
-            images_upload_credentials: true,
-            automatic_uploads: true,
-            images_reuse_filename: true
-        });
-        console.log("TinyMCE initialized (dark)");
-    } else {
-        console.error("TinyMCE not loaded");
-    }
-});
-</script>
+  
+    <script>
+        // Funkcja inicjalizująca z jawnym wskazaniem ścieżek
+        function initEditor() {
+            if (window.tinymce) {
+                tinymce.init({
+                    selector: 'textarea',
+                    license_key: 'gpl',
+                    
+                    // base_url musi być adresem URL, nie ścieżką systemową
+                    base_url: "{{ asset('js/tinymce') }}",
+                    suffix: '.min',
+                    
+                    // Skórki i style
+                    skin: 'oxide-dark',
+                    skin_url: "{{ asset('js/tinymce/skins/ui/oxide-dark') }}",
+                    content_css: "{{ asset('js/tinymce/skins/content/dark/content.min.css') }}",
+                    
+                    plugins: 'advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help wordcount',
+                    toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist | link image | code fullscreen',
+                    
+                    height: 500,
+                    menubar: false,
+                    branding: false,
+                    promotion: false,
+                    
+                    content_style: `
+                        body { 
+                            font-family: 'Inter', sans-serif; 
+                            background-color: #0f172a; 
+                            color: #f8fafc; 
+                            line-height: 1.6;
+                            padding: 1rem;
+                        }
+                    `,
+
+                    // API do zdjęć
+                    images_upload_url: "{{ url('/admin/posts/upload-image') }}",
+                    automatic_uploads: true,
+                    
+                    images_upload_handler: (blobInfo, progress) => new Promise((resolve, reject) => {
+                        const xhr = new XMLHttpRequest();
+                        xhr.open('POST', "{{ url('/admin/posts/upload-image') }}");
+                        xhr.setRequestHeader("X-CSRF-Token", "{{ csrf_token() }}");
+
+                        xhr.upload.onprogress = (e) => progress(e.loaded / e.total * 100);
+
+                        xhr.onload = function() {
+                            if (xhr.status < 200 || xhr.status >= 300) {
+                                reject('Błąd: ' + xhr.status);
+                                return;
+                            }
+                            const json = JSON.parse(xhr.responseText);
+                            if (!json || typeof json.location != 'string') {
+                                reject('Błąd odpowiedzi');
+                                return;
+                            }
+                            resolve(json.location);
+                        };
+
+                        const formData = new FormData();
+                        formData.append('file', blobInfo.blob(), blobInfo.filename());
+                        xhr.send(formData);
+                    }),
+
+                    setup: function(editor) {
+                        editor.on('init', function() {
+                            const loader = document.getElementById('editor-loader');
+                            if(loader) loader.style.display = 'none';
+                            
+                            const editorEl = document.querySelector('.tox-tinymce');
+                            if(editorEl) editorEl.style.visibility = 'visible';
+                            
+                            document.getElementById('content').classList.remove('opacity-0');
+                        });
+                    }
+                });
+            } else {
+                // Ponawiamy próbę jeśli skrypt jeszcze się nie załadował
+                setTimeout(initEditor, 200);
+            }
+        }
+
+        window.onload = initEditor;
+    </script>
+   
+  
+
 </body>
 </html>

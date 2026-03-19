@@ -1,0 +1,1 @@
+console.log("Plik JS działa poprawnie!");
