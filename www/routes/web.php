@@ -1,48 +1,53 @@
 <?php
 
+
+use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\PortfolioController;
 use Illuminate\Support\Facades\Route;
 
+// Strona główna
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('home');
+})->name('home');
+Route::get('/o-mnie', function () { return view('o-mnie'); })->name('o-mnie');
+Route::get('/oferta', function () { return view('oferta'); })->name('oferta');
 
+Route::get('/projekty', function () { return view('projekty'); })->name('projekty');
+
+Route::get('/blog', function () { return view('blog'); })->name('blog');
+
+
+// Dashboard (auth + verified)
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// Profile (auth)
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Auth routes
 require __DIR__.'/auth.php';
 
-Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin/posts', [PostController::class, 'adminIndex']);
-});
-
-Route::get('/check', function() {
-    dd(auth()->user()->is_admin, auth()->user());
-});
-
-Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function() {
+// Admin routes (auth + admin)
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('posts', [PostController::class, 'adminIndex'])->name('posts.index');
     Route::get('posts/create', [PostController::class, 'create'])->name('posts.create');
     Route::post('posts', [PostController::class, 'store'])->name('posts.store');
     Route::get('posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
     Route::put('posts/{post}', [PostController::class, 'update'])->name('posts.update');
     Route::delete('posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+
+    Route::post('posts/upload-image', [PostController::class, 'uploadImage'])->name('posts.uploadImage');
+
+    Route::post('logout', function () {
+        auth()->logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+        return redirect('/login');
+    })->name('logout');
 });
-
-Route::post('admin/posts/upload-image', [PostController::class, 'uploadImage'])->name('admin.posts.uploadImage');
-
-Route::post('/admin/logout', function () {
-    auth()->logout(); // wylogowuje użytkownika z sesji
-    request()->session()->invalidate(); // unieważnia sesję
-    request()->session()->regenerateToken(); // regeneruje CSRF token
-    return redirect('/login'); // przekierowanie po logout
-})->name('admin.logout')->middleware('auth');
