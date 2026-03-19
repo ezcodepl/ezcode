@@ -1,3 +1,14 @@
+1. git clone ....
+2. docker compose up -d
+3. docker compose exec app composer update
+4. set .env
+5. docker compose exec app php artisan migrate
+6. docker compose exec app php artisan key:generatete
+7. docker compose exec app bash
+8. root#:chown -R www-data:www-data storage bootstrap/cache
+9.  docker compose exec app php artisan serve --host=0.0.0.0
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
