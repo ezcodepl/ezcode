@@ -164,4 +164,9 @@ class PostController extends Controller
 
     return response()->json(['location' => "/storage/$path"]);
 }
+
+public function show(Post $post)
+    {
+        return view('admin.posts.show', compact('post'));
+    }
 }

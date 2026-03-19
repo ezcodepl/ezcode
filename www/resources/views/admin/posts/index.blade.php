@@ -64,6 +64,11 @@
                             </td>
                             <td class="px-6 py-4 text-right">
                                 <div class="flex justify-end gap-3">
+                                     <a href="{{ route('admin.posts.show', $post->id) }}" 
+                                       class="p-2 text-gray-400 hover:text-brand hover:bg-brand/10 rounded-lg transition-all"
+                                       title="Pokaż">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
                                     <a href="{{ route('admin.posts.edit', $post->id) }}" 
                                        class="p-2 text-gray-400 hover:text-brand hover:bg-brand/10 rounded-lg transition-all"
                                        title="Edytuj">

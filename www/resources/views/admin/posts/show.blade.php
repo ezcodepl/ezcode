@@ -2,19 +2,8 @@
 @section('title', 'ezCode - admin panel - posts')
 
 @section('content')
-<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-<script>
-    tinymce.init({
-        selector: 'textarea#content',
-        plugins: 'image link media table code',
-        toolbar: 'undo redo | styles | bold italic | alignleft aligncenter alignright | image media link | code',
-        images_upload_url: '{{ route("admin.posts.uploadImage") }}',
-        images_upload_credentials: true,
-        automatic_uploads: true,
-        images_reuse_filename: true
-    });
-</script>
-<div class="max-w-7xl mx-auto p-6 space-y-10">
+
+<div class="max-w-7xl mx-auto p-6 space-y-10 pt-32">
     
     <div class="flex items-center justify-between pb-6 border-b border-white/5">
         <div>
@@ -58,10 +47,11 @@
                 <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-6 pb-3 border-b border-white/5">
                     Treść posta
                 </h3>
-                <div class="prose prose-invert prose-lg max-w-none text-gray-100 leading-relaxed space-y-6">
-                    {{-- Używamy nl2br dla zachowania nowych linii z textarea --}}
-                    {!! nl2br(e($post->content)) !!}
-                </div>
+                <div class="prose prose-invert prose-lg max-w-none text-gray-100">
+    <div class="whitespace-pre-line leading-relaxed">
+       {!! $post->content !!}
+    </div>
+</div>
             </div>
 
             {{-- Zakładamy, że model Post ma relację 'images' (np. Spatie Media Library lub własna) --}}

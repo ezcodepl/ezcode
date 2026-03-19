@@ -3,18 +3,7 @@
 
 @section('content')
 
-<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-<script>
-    tinymce.init({
-        selector: 'textarea#content',
-        plugins: 'image link media table code',
-        toolbar: 'undo redo | styles | bold italic | alignleft aligncenter alignright | image media link | code',
-        images_upload_url: '{{ route("admin.posts.uploadImage") }}',
-        images_upload_credentials: true,
-        automatic_uploads: true,
-        images_reuse_filename: true
-    });
-</script>
+
 <div class="max-w-5xl mx-auto p-6">
     <div class="flex items-center justify-between mb-8 pb-6 border-b border-white/5">
         <div>
@@ -45,7 +34,7 @@
 
                         <div class="space-y-2">
                             <label class="text-sm font-medium text-gray-400 ml-1">Treść posta</label>
-                            <textarea name="content" rows="12" 
+                            <textarea name="content" id="content" rows="12" 
                                       class="w-full bg-darkbg border border-white/10 rounded-xl px-4 py-3 text-white focus:border-brand focus:ring-1 focus:ring-brand transition-all outline-none resize-none">{{ old('content', $post->content) }}</textarea>
                         </div>
                     </div>
