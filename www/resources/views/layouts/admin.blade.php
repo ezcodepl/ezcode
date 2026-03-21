@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'ezCode - Full Stack Developer')</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css"/>
+
 <script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -45,6 +47,7 @@
     @stack('styles')
 </head>
 <body class="antialiased selection:bg-brand selection:text-white bg-darkbg text-white">
+    
     <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(29,78,216,0.15),transparent_45%),radial-gradient(circle_at_bottom_left,rgba(157,78,221,0.1),transparent_45%)]"></div>
     </div>
@@ -148,9 +151,24 @@
         }
 
         window.onload = initEditor;
+        window.addEventListener('scroll', () => {
+    const navbar = document.getElementById('navbar');
+    if (navbar) {
+        if (window.scrollY > 50) {
+            navbar.classList.add('glass-nav', 'py-3');
+        } else {
+            navbar.classList.remove('glass-nav', 'py-3');
+        }
+    }
+});
     </script>
    
   
-
+<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+<script>
+    const lightbox = GLightbox({
+        selector: '.glightbox'
+    });
+</script>
 </body>
 </html>

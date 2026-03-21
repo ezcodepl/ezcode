@@ -49,7 +49,7 @@ services:
       - laravel
 
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin
+    image: phpmyadmin:latest
     container_name: laravel_pma
     restart: always
     ports:

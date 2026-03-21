@@ -36,9 +36,9 @@
 
             <div class="border-t border-slate-800/50 pt-10 flex flex-col md:flex-row justify-between items-center gap-8">
                 <div class="flex flex-col md:flex-row items-center gap-2">
-                    <span class="text-slate-500 text-xs">© 2022</span>
+                    <span class="text-slate-500 text-xs">© 2026</span>
                     <div class="flex items-center gap-1.5">
-                        <span class="font-bold text-white text-sm">ez<span class="text-brand">Code</span></span>
+                        <span class="font-bold text-white text-md">ez<span class="text-brand">Code</span></span>
                     </div>
                     <span class="text-slate-500 text-xs">Wszelkie prawa zastrzeżone</span>
                 </div>

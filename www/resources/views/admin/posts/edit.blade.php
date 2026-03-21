@@ -1,100 +1,171 @@
-@extends('layouts.admin') 
-@section('title', 'ezCode - admin panel - posts')
+@extends('layouts.admin')
+@section('title', 'ezCode - Edycja posta: ' . $post->title)
 
 @section('content')
-
-
-<div class="max-w-5xl mx-auto p-6">
-    <div class="flex items-center justify-between mb-8 pb-6 border-b border-white/5">
+<div class="max-w-7xl mx-auto p-6 lg:p-10 ">
+    <div class="flex items-center justify-between mb-8 pt-32">
         <div>
-            <h2 class="text-3xl font-heading font-bold text-white">Edycja posta</h2>
-            <p class="text-brand text-sm code-font italic">ID: #{{ $post->id }} — {{ $post->created_at->format('d.m.Y') }}</p>
+            <h2 class="text-3xl font-heading font-bold text-white">Edycja postu</h2>
+            <p class="text-gray-400 text-sm italic code-font pt-2">ID: #{{ $post->id }} — Ostatnia aktualizacja: {{ $post->updated_at->format('d.m.Y H:i') }}</p>
         </div>
-        <a href="{{ route('admin.posts.index') }}" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group">
-            <i class="fas fa-arrow-left text-sm group-hover:-translate-x-1 transition-transform"></i>
-            Wróć do listy
+        <a href="{{ route('admin.posts.index') }}" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2">
+            <i class="fas fa-arrow-left text-sm"></i> Powrót do listy
         </a>
     </div>
 
-    <form action="{{ route('admin.posts.update', $post->id) }}" method="POST" enctype="multipart/form-data" class="space-y-8">
+    {{-- SUCCESS --}}
+    @if (session('success'))
+    <div class="mb-6 flex items-start gap-3 rounded-xl border border-green-500/30 bg-green-500/10 p-4 text-green-400 shadow-lg">
+        <i class="fas fa-check-circle mt-1"></i>
+        <div>
+            <p class="font-bold">Sukces</p>
+            <p class="text-sm opacity-90">{{ session('success') }}</p>
+        </div>
+    </div>
+    @endif
+
+    {{-- ERRORS --}}
+    @if ($errors->any())
+    <div class="mb-6 flex items-start gap-3 rounded-xl border border-red-500/30 bg-red-500/10 p-4 text-red-400 shadow-lg">
+        <i class="fas fa-exclamation-triangle mt-1"></i>
+        <div>
+            <p class="font-bold">Wystąpiły błędy</p>
+            <ul class="text-sm mt-2 space-y-1">
+                @foreach ($errors->all() as $error)
+                <li>• {{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    </div>
+    @endif
+
+    <form action="{{ route('admin.posts.update', $post->id) }}" method="POST" id="postForm" enctype="multipart/form-data">
         @csrf
         @method('PUT')
-
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            
-            <div class="lg:col-span-2 space-y-6">
-                <div class="bg-cardbg border border-white/5 rounded-2xl shadow-2xl p-8">
-                    <div class="space-y-6">
-                        <div class="space-y-2">
-                            <label class="text-sm font-medium text-gray-400 ml-1">Tytuł posta</label>
-                            <input type="text" name="title" value="{{ old('title', $post->title) }}" 
-                                   class="w-full bg-darkbg border border-white/10 rounded-xl px-4 py-3 text-white focus:border-brand focus:ring-1 focus:ring-brand transition-all outline-none">
-                            @error('title') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
-                        </div>
-
-                        <div class="space-y-2">
-                            <label class="text-sm font-medium text-gray-400 ml-1">Treść posta</label>
-                            <textarea name="content" id="content" rows="12" 
-                                      class="w-full bg-darkbg border border-white/10 rounded-xl px-4 py-3 text-white focus:border-brand focus:ring-1 focus:ring-brand transition-all outline-none resize-none">{{ old('content', $post->content) }}</textarea>
-                        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            <!-- Edytor Lewa Strona -->
+            <div class="lg:col-span-8 space-y-8">
+                <section class="space-y-4">
+                    <div class="space-y-2">
+                        <label for="title" class="block text-lg font-medium text-gray-300 ml-1">Tytuł posta</label>
+                        <input type="text" name="title" id="title" value="{{ old('title', $post->title) }}" placeholder="Wpisz chwytliwy tytuł..." class="w-full bg-darkbg border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand transition-all shadow-inner" required>
+                        @error('title')
+                        <p class="text-red-500 text-xs mt-1 ml-1">{{ $message }}</p>
+                        @enderror
                     </div>
-                </div>
 
-                <div class="bg-cardbg border border-white/5 rounded-2xl shadow-2xl p-8">
-                    <h3 class="text-white font-bold mb-6 flex items-center gap-2">
-                        <i class="fas fa-images text-brand"></i> Multimedia
-                    </h3>
-                    
-                    <div class="grid grid-cols-3 md:grid-cols-4 gap-4 mb-6">
-                        @foreach($post->images as $image)
-                            <div class="relative group aspect-square rounded-xl overflow-hidden border border-white/10 bg-darkbg">
-                                <img src="{{ $image->url }}" class="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity">
-                                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40">
-                                    <button type="button" class="bg-red-500 text-white p-2 rounded-full hover:scale-110 transition-transform">
-                                        <i class="fas fa-trash-alt text-xs"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        @endforeach
-
-                        <label class="border-2 border-dashed border-white/10 rounded-xl flex flex-col items-center justify-center cursor-pointer hover:border-brand/50 hover:bg-brand/5 transition-all group aspect-square">
-                            <i class="fas fa-plus text-gray-500 group-hover:text-brand mb-1"></i>
-                            <span class="text-[10px] text-gray-500 group-hover:text-brand uppercase font-bold">Dodaj</span>
-                            <input type="file" name="images[]" multiple class="hidden">
-                        </label>
+                    <div class="space-y-2">
+                        <label for="inputExcerpt" class="block text-sm font-medium text-gray-300 ml-1">Krótki opis (Excerpt)</label>
+                        <input name="excerpt" id="inputExcerpt" value="{{ old('excerpt', $post->excerpt) }}" placeholder="Krótki opis posta...." class="w-full bg-darkbg border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand transition-all shadow-inner">
                     </div>
+                </section>
+
+                <section class="bg-[#111827] rounded-3xl p-1 border border-white/5 overflow-hidden">
+                    <textarea name="content" id="ezcode-editor">{{ old('content', $post->content) }}</textarea>
+                </section>
+
+                <div class="flex items-center justify-end gap-4 pt-4 border-t border-white/5">
+                    <a href="{{ route('admin.posts.index') }}" class="px-6 py-3 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition-all font-medium">
+                        Anuluj
+                    </a>
+                    <button type="submit" class="bg-brand hover:bg-brand-dark text-white px-10 py-3 rounded-xl font-bold flex items-center gap-2 transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-brand/20">
+                        <i class="fas fa-save text-sm"></i> Zapisz zmiany
+                    </button>
                 </div>
             </div>
 
-            <div class="space-y-6">
-                <div class="bg-cardbg border border-white/5 rounded-2xl shadow-2xl p-8 sticky top-6">
-                    <h3 class="text-white font-bold mb-6">Ustawienia</h3>
-                    
-                    <div class="space-y-6">
+            <!-- Sidebar Prawa Strona -->
+            <div class="lg:col-span-4 space-y-6">
+                <div class="bg-[#1a1f2e]/95 border border-white/5 rounded-3xl p-6 sticky top-24 z-50 backdrop-blur-sm">
+                    <h4 class="text-sm font-bold uppercase tracking-widest text-gray-500 mb-6 flex items-center gap-2">
+                        <i data-lucide="layout" class="w-4 h-4"></i> Konfiguracja
+                    </h4>
+
+                    <div class="mb-6">
+                        <label class="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-wider">Kategoria</label>
+                        <select name="category" id="inputCategory" class="w-full bg-[#0d1321] border border-white/10 rounded-xl px-4 py-3 text-sm text-white outline-none focus:border-cyan-500 transition-colors appearance-none">
+                            <option value="DEVELOPMENT" {{ $post->category == 'DEVELOPMENT' ? 'selected' : '' }}>DEVELOPMENT</option>
+                            <option value="ARCHITECTURE" {{ $post->category == 'ARCHITECTURE' ? 'selected' : '' }}>ARCHITECTURE</option>
+                            <option value="DEVOPS" {{ $post->category == 'DEVOPS' ? 'selected' : '' }}>DEVOPS</option>
+                            <option value="DESIGN" {{ $post->category == 'DESIGN' ? 'selected' : '' }}>DESIGN</option>
+                        </select>
+                    </div>
+
+                    <div class="space-y-4 pb-4">
                         <div class="space-y-2">
-                            <label class="text-sm font-medium text-gray-400 ml-1">Status publikacji</label>
-                            <select name="status" class="w-full bg-darkbg border border-white/10 rounded-xl px-4 py-3 text-white focus:border-brand outline-none appearance-none cursor-pointer">
-                                <option value="draft" {{ $post->status == 'draft' ? 'selected' : '' }}>Szkic</option>
+                            <label for="status" class="block text-sm font-medium text-gray-300 ml-1">Status</label>
+                            <select name="status" id="status" class="w-full bg-[#0d1321] border border-white/10 rounded-xl px-4 py-3 text-sm text-white outline-none focus:border-cyan-500 transition-colors appearance-none">
+                                <option value="draft" {{ $post->status == 'draft' ? 'selected' : '' }}>Szkic (Draft)</option>
                                 <option value="published" {{ $post->status == 'published' ? 'selected' : '' }}>Opublikowany</option>
-                                <option value="archived" {{ $post->status == 'archived' ? 'selected' : '' }}>Zarchiwizowany</option>
+                                <option value="archived" {{ $post->status == 'archived' ? 'selected' : '' }}>Zarchiwizowano</option>
                             </select>
                         </div>
 
                         <div class="space-y-2">
-                            <label class="text-sm font-medium text-gray-400 ml-1">Data publikacji</label>
-                            <input type="date" name="date_public" 
-                                   value="{{ old('date_public', $post->date_public ? $post->date_public->format('Y-m-d') : '') }}" 
-                                   class="w-full bg-darkbg border border-white/10 rounded-xl px-4 py-3 text-white focus:border-brand outline-none">
+                            <label for="date_public" class="block text-sm font-medium text-gray-300 ml-1">Data publikacji</label>
+                            <input type="date" name="date_public" id="date_public" value="{{ old('date_public', $post->date_public ? $post->date_public->format('Y-m-d') : '') }}" class="w-full bg-darkbg border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand transition-all appearance-none">
                         </div>
 
-                        <div class="pt-6 border-t border-white/5 space-y-3">
-                            <button type="submit" class="w-full bg-brand hover:bg-brand-dark text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-brand/20 flex items-center justify-center gap-2">
-                                <i class="fas fa-save"></i> Zapisz zmiany
-                            </button>
+                        <div class="space-y-2">
+                            <label class="block text-sm text-gray-300">Czas czytania</label>
+                            <input type="text" name="read_time" id="inputReadTime" value="{{ old('read_time', $post->read_time) }}" placeholder="np. 5 min" class="w-full bg-[#0d1321] border border-white/10 rounded-xl px-4 py-3 text-white">
+                        </div>
+                    </div>
+
+                    <div class="mb-8">
+                        <label class="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-wider">Miniatura (16:9)</label>
+                        <div class="relative aspect-video rounded-2xl overflow-hidden bg-[#0d1321] border border-dashed border-white/20 flex flex-col items-center justify-center cursor-pointer hover:border-cyan-500/50 group transition-all" id="dropZone">
+                            {{-- Poprawiona ścieżka do miniatury --}}
+                            @php
+                                $thumbnailPath = null;
+                                if($post->thumbnail) {
+                                    $thumbnailPath = str_starts_with($post->thumbnail->path, 'http') 
+                                        ? $post->thumbnail->path 
+                                        : asset('storage/' . $post->thumbnail->path);
+                                }
+                            @endphp
                             
-                            <a href="{{ route('admin.posts.show', $post->id) }}" class="w-full block text-center py-3 rounded-xl text-gray-400 hover:bg-white/5 transition-all text-sm">
-                                Anuluj edycję
-                            </a>
+                            <img id="imgPreview" class="{{ $thumbnailPath ? '' : 'hidden' }} w-full h-full object-cover" src="{{ $thumbnailPath ?? '#' }}" />
+                            
+                            <div id="uploadPlaceholder" class="{{ $thumbnailPath ? 'hidden' : 'flex' }} flex flex-col items-center gap-2 text-gray-500 group-hover:text-cyan-400 transition-colors">
+                                <i data-lucide="upload" class="w-8 h-8"></i>
+                                <span class="text-[10px] font-bold uppercase tracking-widest">Zmień obraz</span>
+                            </div>
+                            <input type="file" name="thumbnail" id="thumbnailInput" class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*" />
+                        </div>
+                    </div>
+
+                    <!-- LIVE PREVIEW CARD -->
+                    <div class="space-y-4 pt-4 border-t border-white/5">
+                        <h4 class="text-[10px] font-bold uppercase tracking-widest text-gray-500">Podgląd aktualizacji</h4>
+                        <div class="scale-[0.85] origin-top mx-auto">
+                            <div class="w-full bg-[#1a1f2e] rounded-[24px] overflow-hidden border border-white/5 shadow-2xl">
+                                <div class="relative h-[180px] w-full bg-[#111827]">
+                                    <img id="cardThumbnail" src="{{ $thumbnailPath ?? '' }}" class="{{ $thumbnailPath ? '' : 'hidden' }} w-full h-full object-cover opacity-80">
+                                    <div id="cardThumbnailPlaceholder" class="{{ $thumbnailPath ? 'hidden' : 'flex' }} w-full h-full flex flex-col items-center justify-center text-gray-700">
+                                        <i data-lucide="image" class="w-10 h-10"></i>
+                                    </div>
+                                    <div class="absolute top-4 left-4">
+                                        <span id="previewCategory" class="bg-cyan-500/20 text-cyan-400 text-[10px] font-bold px-3 py-1 rounded-full border border-cyan-500/30 tracking-widest uppercase">
+                                            {{ $post->category ?? 'DEVELOPMENT' }}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="p-5">
+                                    <div class="flex items-center gap-2 text-gray-500 text-[10px] mb-2">
+                                        <div class="flex items-center gap-1"><i data-lucide="user" class="w-3 h-3"></i> {{ $post->user->name ?? 'Admin' }}</div>
+                                        <span>•</span>
+                                        <div class="flex items-center gap-1"><i data-lucide="clock" class="w-3 h-3"></i> {{ $post->created_at->format('d.m.Y') }}</div>
+                                    </div>
+                                    <h3 id="previewTitle" class="text-white text-lg font-bold leading-tight mb-3 line-clamp-2 min-h-[44px]">{{ $post->title }}</h3>
+                                    <p id="previewExcerpt" class="text-gray-400 text-xs leading-relaxed mb-4 line-clamp-3 min-h-[48px]">{{ $post->excerpt ?? 'Krótki opis posta...' }}</p>
+                                    <div class="flex items-center justify-between border-t border-white/5 pt-3">
+                                        <span id="previewReadTime" class="text-gray-500 text-[9px] uppercase tracking-widest font-medium">{{ $post->read_time ?? '5 MIN CZYTANIA' }}</span>
+                                        <div class="text-cyan-400 text-xs font-bold flex items-center gap-1">Czytaj <i data-lucide="arrow-up-right" class="w-3 h-3"></i></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -102,4 +173,72 @@
         </div>
     </form>
 </div>
+
+<script>
+    // Inicjalizacja Ikon lucide
+    lucide.createIcons();
+
+    // Inicjalizacja TinyMCE
+    tinymce.init({
+        selector: '#ezcode-editor',
+        height: 500,
+        menubar: false,
+        license_key: 'gpl',
+        skin: 'oxide-dark',
+        content_css: 'dark',
+        plugins: 'advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table code help wordcount',
+        toolbar: 'undo redo | blocks | bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | image gallery | help',
+        content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; background: #111827; color: #d1d5db; padding: 20px; } h2, h3 { color: white; font-weight: bold; }',
+    });
+
+    // Obsługa Live Preview
+    const inputTitle = document.getElementById('title');
+    const inputExcerpt = document.getElementById('inputExcerpt');
+    const inputCategory = document.getElementById('inputCategory');
+    const inputReadTime = document.getElementById('inputReadTime');
+    const thumbnailInput = document.getElementById('thumbnailInput');
+
+    const previewTitle = document.getElementById('previewTitle');
+    const previewExcerpt = document.getElementById('previewExcerpt');
+    const previewCategory = document.getElementById('previewCategory');
+    const previewReadTime = document.getElementById('previewReadTime');
+    const cardThumbnail = document.getElementById('cardThumbnail');
+    const cardThumbnailPlaceholder = document.getElementById('cardThumbnailPlaceholder');
+    const imgPreview = document.getElementById('imgPreview');
+    const uploadPlaceholder = document.getElementById('uploadPlaceholder');
+
+    inputTitle.addEventListener('input', (e) => {
+        previewTitle.innerText = e.target.value || "Tytuł artykułu...";
+    });
+
+    inputExcerpt.addEventListener('input', (e) => {
+        previewExcerpt.innerText = e.target.value || "Krótki opis posta...";
+    });
+
+    inputCategory.addEventListener('change', (e) => {
+        previewCategory.innerText = e.target.value;
+    });
+
+    inputReadTime.addEventListener('input', (e) => {
+        const val = e.target.value || "5 MIN";
+        previewReadTime.innerText = val.toUpperCase().includes("CZYTANIA") ? val.toUpperCase() : val.toUpperCase() + " CZYTANIA";
+    });
+
+    thumbnailInput.addEventListener('change', function(e) {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                imgPreview.src = event.target.result;
+                imgPreview.classList.remove('hidden');
+                uploadPlaceholder.classList.add('hidden');
+                
+                cardThumbnail.src = event.target.result;
+                cardThumbnail.classList.remove('hidden');
+                cardThumbnailPlaceholder.classList.add('hidden');
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
 @endsection

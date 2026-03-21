@@ -435,37 +435,82 @@
             </div>
         </div>
     </section>
+    <section class="max-w-7xl mx-auto px-6 py-24">
 	<!-- BLOG PREVIEW (OPCJONALNIE) -->
-    <section id="blog" class="py-24 bg-[#111827]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+    <!-- Siatka postów -->
+        <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
                 <div>
                     <h2 class="text-brand font-bold uppercase text-xs tracking-widest mb-3">BLOG</h2>
                     <h3 class="text-4xl font-bold text-white">Wiedza i aktualności</h3>
                 </div>
-                <a href="#" class="text-brand hover:text-white transition-colors flex items-center gap-2 font-medium">
+                <a href="{{ route('blog') }}" class="text-brand hover:text-white transition-colors flex items-center gap-2 font-medium">
                     Zobacz wszystkie wpisy <i class="fa-solid fa-arrow-right"></i>
                 </a>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <article class="bg-darkbg p-6 rounded-2xl border border-slate-800">
-                    <div class="text-slate-500 text-xs mb-4 uppercase tracking-wider">12 Marca 2024</div>
-                    <h4 class="text-xl font-bold text-white mb-4 hover:text-brand cursor-pointer">Jak zoptymalizować stronę pod SEO?</h4>
-                    <p class="text-slate-400 text-sm">Poznaj 5 kluczowych kroków, które pomogą Ci wspiąć się w wynikach wyszukiwania.</p>
-                </article>
-                <article class="bg-darkbg p-6 rounded-2xl border border-slate-800">
-                    <div class="text-slate-500 text-xs mb-4 uppercase tracking-wider">05 Marca 2024</div>
-                    <h4 class="text-xl font-bold text-white mb-4 hover:text-brand cursor-pointer">Przyszłość technologii Web w 2024</h4>
-                    <p class="text-slate-400 text-sm">Co czeka branżę web developmentu w nadchodzących miesiącach? Analiza trendów.</p>
-                </article>
-                <article class="bg-darkbg p-6 rounded-2xl border border-slate-800">
-                    <div class="text-slate-500 text-xs mb-4 uppercase tracking-wider">28 Lutego 2024</div>
-                    <h4 class="text-xl font-bold text-white mb-4 hover:text-brand cursor-pointer">Dlaczego responsywność to podstawa?</h4>
-                    <p class="text-slate-400 text-sm">Wpływ Mobile-First Indexing na widoczność Twojego biznesu w sieci.</p>
-                </article>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+
+
+    @foreach($posts as $post)
+    <article class="blog-card rounded-[2rem] overflow-hidden flex flex-col bg-[#151b2b] border border-white/5 shadow-xl transition-all hover:border-brand/30">
+        
+        <!-- Górna część z obrazkiem -->
+        <div class="relative h-[208px] w-full overflow-hidden">
+            <img src="{{ $post->thumbnail ? asset('storage/' . $post->thumbnail->path) : 'https://via.placeholder.com/600x400' }}" 
+                 alt="{{ $post->title }}" 
+                 class="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000 ease-in-out">
+
+            <!-- Kategoria -->
+            <div class="absolute top-8 left-8">
+                <span class="bg-black/60 backdrop-blur-xl text-cyan-400 text-[10px] font-black px-5 py-2.5 rounded-2xl border border-white/10 tracking-[0.2em] uppercase shadow-2xl">
+                    {{ strtoupper($post->category) }}
+                </span>
+            </div>
+            
+            <!-- Gradientowy Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0f141f] via-transparent to-transparent opacity-90"></div>
+        </div>
+
+        <!-- Treść -->
+        <div class="p-10 pt-4">
+            <!-- Meta -->
+            <div class="flex items-center gap-4 text-gray-500 text-[10px] mb-6 font-bold uppercase tracking-widest">
+                <div class="flex items-center gap-2"><i data-lucide="user" class="w-3 h-3"></i>
+                  
+                    {{ $post->user->name ?? 'Admin' }}
+                </div>
+                <span class="opacity-20">/</span>
+                <div class="flex items-center gap-1.5">
+                    <i class="far fa-clock text-cyan-500"></i>
+                    {{ $post->date_public ? $post->date_public->format('d M Y') : '---' }}
+                </div>
+            </div>
+
+            <!-- Tytuł -->
+            <h3 class="text-white text-xl title-font leading-[1.3] line-clamp-2 min-h-[56px] group-hover:text-cyan-400 transition-colors duration-300">
+                {{ $post->title }}
+            </h3>
+
+            <p class="text-gray-500 text-sm leading-relaxed mb-3 line-clamp-3 min-h-[20px]">
+                {{ Str::limit(strip_tags($post->content), 140) }}
+            </p>
+
+            <!-- Stopka -->
+            <div class="flex items-center justify-between border-t border-white/[0.05] pt-6">
+                <span class="text-gray-600 text-[10px] uppercase tracking-[0.3em] font-black">{{ $post->read_time ?? '10 MIN READ' }}</span>
+                
+                <a href="{{ route('posts.show', $post->slug) }}" class="group/btn flex items-center gap-4 text-white text-[11px] font-black uppercase tracking-[0.2em] hover:text-cyan-400 transition-all">
+                    CZYTAJ
+                    <div class="w-10 h-10 rounded-2xl bg-white/[0.03] flex items-center justify-center group-hover/btn:bg-cyan-500/20 group-hover/btn:rotate-[45deg] transition-all duration-500">
+                        <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
+                    </div>
+                </a>
             </div>
         </div>
-    </section>
+    </article>
+    @endforeach
+</div>
+</section>
+   
 
     <!-- ROZPOCZNIJ PROJEKT -->
     <section class="py-24 bg-darkbg border-t border-slate-800/50">
