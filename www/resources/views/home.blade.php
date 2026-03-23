@@ -45,15 +45,15 @@
                             </div>
                             <div class="code-font text-sm leading-relaxed p-4 bg-[#0f172a] rounded-lg">
                                <pre class="text-slate-300"><span class="text-purple-400">const</span> <span class="text-blue-400">developer</span> = {
-  <span class="text-brand">name</span>: <span class="text-green-300">'ezCode'</span>,
-  <span class="text-brand">role</span>: <span class="text-green-300">'Full Stack Web Developer'</span>,
-  <span class="text-brand">skills</span>: [<span class="text-green-300">'PHP'</span>, <span class="text-green-300">'JavaScript'</span>, <span class="text-green-300">'Tailwind'</span>],
-  <span class="text-brand">responsive</span>: <span class="text-orange-400">true</span>,
-  <span class="text-brand">buildWebsite</span>: <span class="text-purple-400">function</span>() {
-    <span class="text-slate-500">// Zmieniam pomysły w rzeczywistość</span>
-    <span class="text-blue-400">return</span> <span class="text-green-300">'Sukces!'</span>;
-  }
-};</pre>
+                                <span class="text-brand">name</span>: <span class="text-green-300">'ezCode'</span>,
+                                <span class="text-brand">role</span>: <span class="text-green-300">'Full Stack Web Developer'</span>,
+                                <span class="text-brand">skills</span>: [<span class="text-green-300">'PHP'</span>, <span class="text-green-300">'JavaScript'</span>, <span class="text-green-300">'Tailwind'</span>],
+                                <span class="text-brand">responsive</span>: <span class="text-orange-400">true</span>,
+                                <span class="text-brand">buildWebsite</span>: <span class="text-purple-400">function</span>() {
+                                    <span class="text-slate-500">// Zmieniam pomysły w rzeczywistość</span>
+                                    <span class="text-blue-400">return</span> <span class="text-green-300">'Sukces!'</span>;
+                                }
+                                };</pre>
                             </div>
                         </div>
                     </div>
@@ -448,9 +448,7 @@
                 </a>
             </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-
-
-    @foreach($posts as $post)
+    @forelse($posts as $post)
     <article class="blog-card rounded-[2rem] overflow-hidden flex flex-col bg-[#151b2b] border border-white/5 shadow-xl transition-all hover:border-brand/30">
         
         <!-- Górna część z obrazkiem -->
@@ -460,32 +458,31 @@
                  class="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000 ease-in-out">
 
             <!-- Kategoria -->
+            @if(isset($post->category))
             <div class="absolute top-8 left-8">
                 <span class="bg-black/60 backdrop-blur-xl text-cyan-400 text-[10px] font-black px-5 py-2.5 rounded-2xl border border-white/10 tracking-[0.2em] uppercase shadow-2xl">
                     {{ strtoupper($post->category) }}
                 </span>
             </div>
+            @endif
             
-            <!-- Gradientowy Overlay -->
             <div class="absolute inset-0 bg-gradient-to-t from-[#0f141f] via-transparent to-transparent opacity-90"></div>
         </div>
 
         <!-- Treść -->
         <div class="p-10 pt-4">
-            <!-- Meta -->
             <div class="flex items-center gap-4 text-gray-500 text-[10px] mb-6 font-bold uppercase tracking-widest">
-                <div class="flex items-center gap-2"><i data-lucide="user" class="w-3 h-3"></i>
-                  
+                <div class="flex items-center gap-2">
+                    <i data-lucide="user" class="w-3 h-3"></i>
                     {{ $post->user->name ?? 'Admin' }}
                 </div>
                 <span class="opacity-20">/</span>
                 <div class="flex items-center gap-1.5">
                     <i class="far fa-clock text-cyan-500"></i>
-                    {{ $post->date_public ? $post->date_public->format('d M Y') : '---' }}
+                    {{ $post->date_public ? \Carbon\Carbon::parse($post->date_public)->format('d M Y') : '---' }}
                 </div>
             </div>
 
-            <!-- Tytuł -->
             <h3 class="text-white text-xl title-font leading-[1.3] line-clamp-2 min-h-[56px] group-hover:text-cyan-400 transition-colors duration-300">
                 {{ $post->title }}
             </h3>
@@ -494,11 +491,10 @@
                 {{ Str::limit(strip_tags($post->content), 140) }}
             </p>
 
-            <!-- Stopka -->
             <div class="flex items-center justify-between border-t border-white/[0.05] pt-6">
                 <span class="text-gray-600 text-[10px] uppercase tracking-[0.3em] font-black">{{ $post->read_time ?? '10 MIN READ' }}</span>
                 
-                <a href="{{ route('posts.show', $post->slug) }}" class="group/btn flex items-center gap-4 text-white text-[11px] font-black uppercase tracking-[0.2em] hover:text-cyan-400 transition-all">
+                <a href="{{ route('blog-show', $post->slug) }}" class="group/btn flex items-center gap-4 text-white text-[11px] font-black uppercase tracking-[0.2em] hover:text-cyan-400 transition-all">
                     CZYTAJ
                     <div class="w-10 h-10 rounded-2xl bg-white/[0.03] flex items-center justify-center group-hover/btn:bg-cyan-500/20 group-hover/btn:rotate-[45deg] transition-all duration-500">
                         <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
@@ -507,7 +503,9 @@
             </div>
         </div>
     </article>
-    @endforeach
+@empty
+    <p class="text-white text-center mt-10">Brak nowych postów.</p>
+@endforelse
 </div>
 </section>
    
