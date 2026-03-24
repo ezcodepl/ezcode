@@ -1,98 +1,133 @@
 @extends('layouts.app') @section('title', 'Strona Główna - Witamy!')
 
 @section('content')
-<!-- Efekty tła -->
+    <!-- Efekty tła -->
     <div
         class="fixed inset-0 bg-[radial-gradient(circle_at_top_right,rgba(29,78,216,0.12),transparent_40%),radial-gradient(circle_at_bottom_left,rgba(157,78,221,0.08),transparent_40%)] pointer-events-none z-0">
     </div>
     <div
         class="fixed inset-0 opacity-[0.02] pointer-events-none z-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]">
     </div>
-      <!-- HERO SLIDER SECTION -->
+    <!-- HERO SLIDER SECTION -->
     <section class="relative min-h-screen flex items-center pt-20 hero-gradient overflow-hidden">
         <div id="hero-slider" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-            
+
             <!-- Slajd 1: Programowanie -->
-            <div class="slide active">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                    <div>
-                        <div class="inline-flex items-center px-4 py-1.5 rounded-full border border-brand/20 bg-brand/10 text-brand text-xs font-medium mb-6">
-                            <i class="fa-solid fa-terminal mr-2"></i> Dostępny do współpracy
-                        </div>
-                        <h1 class="text-5xl md:text-7xl font-extrabold leading-[1.1] mb-6">
-                            Witaj, jestem <br>
-                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand to-purple-400">Full Stack</span><br>
-                            Developerem.
-                        </h1>
-                        <p class="text-slate-400 text-lg mb-8 max-w-lg leading-relaxed">
-                            Projektuję i koduję nowoczesne, w pełni responsywne aplikacje webowe oraz strony internetowe. Zmieniam pomysły w działający kod.
-                        </p>
-                        <div class="flex flex-wrap gap-4">
-                            <a href="#projekty" class="bg-brand hover:bg-brand-dark text-white px-8 py-4 rounded-xl font-bold transition-all shadow-lg shadow-brand/25 flex items-center">
-                                Moje realizacje <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
-                            </a>
-                            <button class="bg-[#1e293b] hover:bg-slate-700 text-white px-8 py-4 rounded-xl font-bold transition-all flex items-center border border-slate-700">
-                                <i class="fa-brands fa-github mr-2 text-xl"></i> GitHub
-                            </button>
-                        </div>
-                    </div>
-                    <div class="hidden lg:block relative">
-                        <div class="bg-[#1e293b] rounded-2xl p-5 shadow-2xl border border-slate-800 transform rotate-1 hover:rotate-0 transition-transform duration-700">
-                            <div class="flex gap-1.5 mb-5 px-1">
-                                <div class="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
-                                <div class="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
-                                <div class="w-3 h-3 rounded-full bg-[#27c93f]"></div>
-                            </div>
-                            <div class="code-font text-sm leading-relaxed p-4 bg-[#0f172a] rounded-lg">
-                               <pre class="text-slate-300"><span class="text-purple-400">const</span> <span class="text-blue-400">developer</span> = {
-                                <span class="text-brand">name</span>: <span class="text-green-300">'ezCode'</span>,
-                                <span class="text-brand">role</span>: <span class="text-green-300">'Full Stack Web Developer'</span>,
-                                <span class="text-brand">skills</span>: [<span class="text-green-300">'PHP'</span>, <span class="text-green-300">'JavaScript'</span>, <span class="text-green-300">'Tailwind'</span>],
-                                <span class="text-brand">responsive</span>: <span class="text-orange-400">true</span>,
-                                <span class="text-brand">buildWebsite</span>: <span class="text-purple-400">function</span>() {
-                                    <span class="text-slate-500">// Zmieniam pomysły w rzeczywistość</span>
-                                    <span class="text-blue-400">return</span> <span class="text-green-300">'Sukces!'</span>;
-                                }
-                                };</pre>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<div class="slide active">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        
+        <!-- LEFT -->
+        <div>
+            <div class="inline-flex items-center px-4 py-1.5 rounded-full border border-brand/20 bg-brand/10 text-brand text-xs font-medium mb-6">
+                <i class="fa-solid fa-terminal mr-2"></i> Dostępny do współpracy
             </div>
+
+            <h1 class="text-5xl md:text-7xl font-extrabold leading-[1.1] mb-6">
+                Witaj, jestem <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand to-purple-400">
+                    Full Stack
+                </span><br>
+                Developerem.
+            </h1>
+
+            <p class="text-slate-400 text-lg mb-8 max-w-lg leading-relaxed">
+                Projektuję i koduję nowoczesne, w pełni responsywne aplikacje webowe oraz strony internetowe.
+                Zmieniam pomysły w działający kod.
+            </p>
+
+            <div class="flex flex-wrap gap-4">
+                <a href="#projekty"
+                    class="bg-brand hover:bg-brand-dark text-white px-8 py-4 rounded-xl font-bold transition-all shadow-lg shadow-brand/25 flex items-center">
+                    Moje realizacje <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+                </a>
+
+                <button
+                    class="bg-[#1e293b] hover:bg-slate-700 text-white px-8 py-4 rounded-xl font-bold transition-all flex items-center border border-slate-700">
+                    <i class="fa-brands fa-github mr-2 text-xl"></i> GitHub
+                </button>
+            </div>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="hidden lg:flex justify-center">
+            <div class="w-full max-w-lg">
+                
+                <div class="bg-[#1e293b] rounded-2xl p-4 shadow-2xl border border-slate-800 transform rotate-1 hover:rotate-0 transition duration-700">
+                    
+                    <!-- top bar -->
+                    <div class="flex gap-1.5 mb-4 px-1">
+                        <div class="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
+                        <div class="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
+                        <div class="w-3 h-3 rounded-full bg-[#27c93f]"></div>
+                    </div>
+
+                    <!-- code -->
+                    <div class="code-font text-sm bg-[#0f172a] rounded-lg p-3">
+<pre class="text-slate-300 m-0 leading-relaxed"><span class="text-purple-400">const</span> <span class="text-blue-400">developer</span> = {
+  <span class="text-brand">name</span>: <span class="text-green-300">'ezCode'</span>,
+  <span class="text-brand">role</span>: <span class="text-green-300">'Full Stack Web Developer'</span>,
+  <span class="text-brand">skills</span>: [<span class="text-green-300">'PHP'</span>, <span class="text-green-300">'JavaScript'</span>, <span class="text-green-300">'Tailwind'</span>],
+  <span class="text-brand">responsive</span>: <span class="text-orange-400">true</span>,
+  <span class="text-brand">buildWebsite</span>: <span class="text-purple-400">function</span>() {
+    <span class="text-slate-500">// Zmieniam pomysły w rzeczywistość</span>
+    <span class="text-blue-400">return</span> <span class="text-green-300">'Sukces!'</span>;
+  }
+};</pre>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
 
             <!-- Slajd 2: E-commerce -->
             <div class="slide">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     <div>
-                        <div class="inline-flex items-center px-4 py-1.5 rounded-full border border-purple-500/20 bg-purple-500/10 text-purple-400 text-xs font-medium mb-6">
+                        <div
+                            class="inline-flex items-center px-4 py-1.5 rounded-full border border-purple-500/20 bg-purple-500/10 text-purple-400 text-xs font-medium mb-6">
                             <i class="fa-solid fa-cart-shopping mr-2"></i> Sklepy internetowe
                         </div>
                         <h1 class="text-5xl md:text-7xl font-extrabold leading-[1.1] mb-6">
                             Rozwiń swój <br>
-                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">E-commerce</span><br>
+                            <span
+                                class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">E-commerce</span><br>
                             bez ograniczeń.
                         </h1>
                         <p class="text-slate-400 text-lg mb-8 max-w-lg leading-relaxed">
-                            Tworzę szybkie, bezpieczne i zoptymalizowane pod sprzedaż sklepy online. Integruję płatności, kurierów i systemy ERP.
+                            Tworzę szybkie, bezpieczne i zoptymalizowane pod sprzedaż sklepy online. Integruję płatności,
+                            kurierów i systemy ERP.
                         </p>
                         <div class="flex flex-wrap gap-4">
-                            <a href="#oferta" class="bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 rounded-xl font-bold transition-all shadow-lg shadow-purple-500/25 flex items-center">
+                            <a href="#oferta"
+                                class="bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 rounded-xl font-bold transition-all shadow-lg shadow-purple-500/25 flex items-center">
                                 Sprawdź ofertę <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
                             </a>
                         </div>
                     </div>
                     <div class="hidden lg:block relative">
-                        <div class="bg-cardbg rounded-2xl p-8 border border-slate-800 shadow-2xl relative overflow-hidden group">
+                        <div
+                            class="bg-cardbg rounded-2xl p-8 border border-slate-800 shadow-2xl relative overflow-hidden group">
                             <div class="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 blur-3xl rounded-full"></div>
                             <div class="flex flex-col gap-6">
-                                <div class="flex items-center justify-between p-4 bg-darkbg/50 rounded-xl border border-white/5">
+                                <div
+                                    class="flex items-center justify-between p-4 bg-darkbg/50 rounded-xl border border-white/5">
                                     <div class="flex items-center gap-3">
-                                        <div class="w-10 h-10 rounded bg-brand/20 flex items-center justify-center text-brand"><i class="fa-solid fa-box"></i></div>
-                                        <div><div class="text-sm font-bold text-white">Nowe zamówienie</div><div class="text-xs text-slate-500">#4521 - 249.00 zł</div></div>
+                                        <div
+                                            class="w-10 h-10 rounded bg-brand/20 flex items-center justify-center text-brand">
+                                            <i class="fa-solid fa-box"></i></div>
+                                        <div>
+                                            <div class="text-sm font-bold text-white">Nowe zamówienie</div>
+                                            <div class="text-xs text-slate-500">#4521 - 249.00 zł</div>
+                                        </div>
                                     </div>
                                     <div class="text-xs text-green-400 font-bold">+12% dzisiaj</div>
                                 </div>
-                                <div class="h-32 w-full bg-darkbg/50 rounded-xl border border-white/5 flex items-end p-4 gap-2">
+                                <div
+                                    class="h-32 w-full bg-darkbg/50 rounded-xl border border-white/5 flex items-end p-4 gap-2">
                                     <div class="w-full bg-brand/40 h-1/2 rounded-t-sm"></div>
                                     <div class="w-full bg-brand/60 h-3/4 rounded-t-sm"></div>
                                     <div class="w-full bg-brand h-full rounded-t-sm"></div>
@@ -108,36 +143,44 @@
             <div class="slide">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     <div>
-                        <div class="inline-flex items-center px-4 py-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/10 text-emerald-400 text-xs font-medium mb-6">
+                        <div
+                            class="inline-flex items-center px-4 py-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/10 text-emerald-400 text-xs font-medium mb-6">
                             <i class="fa-solid fa-wand-magic-sparkles mr-2"></i> Systemy dedykowane
                         </div>
                         <h1 class="text-5xl md:text-7xl font-extrabold leading-[1.1] mb-6">
                             Interfejsy, które <br>
-                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-brand">Zachwycają</span><br>
+                            <span
+                                class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-brand">Zachwycają</span><br>
                             użytkowników.
                         </h1>
                         <p class="text-slate-400 text-lg mb-8 max-w-lg leading-relaxed">
-                            Analizuję, projektuję i wdrażam dedykowane panele administracyjne oraz systemy CRM dopasowane do Twoich procesów.
+                            Analizuję, projektuję i wdrażam dedykowane panele administracyjne oraz systemy CRM dopasowane do
+                            Twoich procesów.
                         </p>
                         <div class="flex flex-wrap gap-4">
-                            <a href="#omnie" class="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-xl font-bold transition-all shadow-lg shadow-emerald-500/25 flex items-center">
+                            <a href="#omnie"
+                                class="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-xl font-bold transition-all shadow-lg shadow-emerald-500/25 flex items-center">
                                 Dowiedz się więcej <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
                             </a>
                         </div>
                     </div>
                     <div class="hidden lg:block relative">
-                         <div class="grid grid-cols-2 gap-4">
+                        <div class="grid grid-cols-2 gap-4">
                             <div class="bg-cardbg p-6 rounded-2xl border border-slate-800 shadow-xl">
-                                <div class="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 mb-4"><i class="fa-solid fa-chart-line"></i></div>
+                                <div
+                                    class="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 mb-4">
+                                    <i class="fa-solid fa-chart-line"></i></div>
                                 <div class="text-2xl font-bold text-white">99.9%</div>
                                 <div class="text-xs text-slate-500">Dostępności systemów</div>
                             </div>
                             <div class="bg-cardbg p-6 rounded-2xl border border-slate-800 shadow-xl mt-8">
-                                <div class="w-8 h-8 rounded-full bg-brand/20 flex items-center justify-center text-brand mb-4"><i class="fa-solid fa-gauge-high"></i></div>
+                                <div
+                                    class="w-8 h-8 rounded-full bg-brand/20 flex items-center justify-center text-brand mb-4">
+                                    <i class="fa-solid fa-gauge-high"></i></div>
                                 <div class="text-2xl font-bold text-white">&lt; 1s</div>
                                 <div class="text-xs text-slate-500">Czas ładowania strony</div>
                             </div>
-                         </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -150,25 +193,30 @@
                     <span class="dot" onclick="currentSlide(2)"></span>
                 </div>
                 <div class="flex gap-2">
-                    <button onclick="changeSlide(-1)" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-slate-400 hover:bg-white/5 transition-all">
+                    <button onclick="changeSlide(-1)"
+                        class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-slate-400 hover:bg-white/5 transition-all">
                         <i class="fa-solid fa-chevron-left"></i>
                     </button>
-                    <button onclick="changeSlide(1)" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-slate-400 hover:bg-white/5 transition-all">
+                    <button onclick="changeSlide(1)"
+                        class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-slate-400 hover:bg-white/5 transition-all">
                         <i class="fa-solid fa-chevron-right"></i>
                     </button>
                 </div>
             </div>
         </div>
     </section>
-     <!-- O MNIE -->
+    <!-- O MNIE -->
     <section id="omnie" class="py-24 bg-darkbg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <div class="relative group">
                     <div class="rounded-2xl overflow-hidden border border-slate-800 shadow-2xl">
-                        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80" alt="Stanowisko pracy" class="w-full grayscale group-hover:grayscale-0 transition-all duration-700">
+                        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80"
+                            alt="Stanowisko pracy"
+                            class="w-full grayscale group-hover:grayscale-0 transition-all duration-700">
                     </div>
-                    <div class="absolute -bottom-6 -right-6 md:right-10 md:bottom-10 bg-[#1e293b]/95 backdrop-blur-md p-6 rounded-2xl border border-slate-700 shadow-2xl flex items-center gap-4 z-20">
+                    <div
+                        class="absolute -bottom-6 -right-6 md:right-10 md:bottom-10 bg-[#1e293b]/95 backdrop-blur-md p-6 rounded-2xl border border-slate-700 shadow-2xl flex items-center gap-4 z-20">
                         <div class="w-12 h-12 rounded-lg bg-brand/20 flex items-center justify-center text-brand">
                             <i class="fa-solid fa-mobile-screen-button text-2xl"></i>
                         </div>
@@ -182,10 +230,14 @@
                     <h2 class="text-brand font-bold uppercase text-xs tracking-widest mb-3">POZNAJMY SIĘ</h2>
                     <h3 class="text-4xl font-bold text-white mb-6">Od pomysłu do wdrożenia.</h3>
                     <p class="text-slate-400 leading-relaxed mb-8">
-                        Wszystkie moje projekty są responsywne, co niesie za sobą możliwość poprawnego wyświetlania stron internetowych i aplikacji na urządzeniach mobilnych oraz PC.
+                        Wszystkie moje projekty są responsywne, co niesie za sobą możliwość poprawnego wyświetlania stron
+                        internetowych i aplikacji na urządzeniach mobilnych oraz PC.
                     </p>
                     <p class="text-slate-400 leading-relaxed mb-10">
-                        Moja przygoda z programowaniem trwa od lat. Do czasu stworzenia <span class="text-white font-medium">ezcode.pl</span> moje projekty widniały pod domeną www.page4me.pl. Stale rozwijam swoje umiejętności, aby dostarczać rozwiązania najwyższej jakości, opierając się na nowoczesnych technologiach takich jak PHP, JavaScript i nowoczesne frameworki CSS.
+                        Moja przygoda z programowaniem trwa od lat. Do czasu stworzenia <span
+                            class="text-white font-medium">ezcode.pl</span> moje projekty widniały pod domeną
+                        www.page4me.pl. Stale rozwijam swoje umiejętności, aby dostarczać rozwiązania najwyższej jakości,
+                        opierając się na nowoczesnych technologiach takich jak PHP, JavaScript i nowoczesne frameworki CSS.
                     </p>
                     <div class="flex gap-16 border-t border-slate-800 pt-10">
                         <div>
@@ -217,7 +269,8 @@
                     </div>
                     <h4 class="text-xl font-bold text-white mb-4">Strony WWW</h4>
                     <p class="text-slate-400 text-sm leading-relaxed">
-                        Projektowanie nowoczesnych, szybkich i bezpiecznych stron internetowych dopasowanych do Twojego biznesu.
+                        Projektowanie nowoczesnych, szybkich i bezpiecznych stron internetowych dopasowanych do Twojego
+                        biznesu.
                     </p>
                 </div>
                 <!-- Sklepy Online -->
@@ -260,7 +313,7 @@
                 <h2 class="text-brand font-bold uppercase text-xs tracking-widest mb-3">MOJE UMIEJĘTNOŚCI</h2>
                 <h3 class="text-4xl font-bold text-white">Technologie, z którymi pracuję</h3>
             </div>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-12 mb-16">
                 <!-- Kolumna 1 -->
                 <div class="space-y-10">
@@ -281,7 +334,8 @@
                         <div class="flex justify-between items-center mb-3">
                             <div class="flex items-center gap-3">
                                 <i class="fa-brands fa-python text-[#3776AB] text-lg"></i>
-                                <span class="text-white font-bold text-sm uppercase tracking-wide">Python (Django / Flask)</span>
+                                <span class="text-white font-bold text-sm uppercase tracking-wide">Python (Django /
+                                    Flask)</span>
                             </div>
                             <span class="text-slate-500 text-sm">70%</span>
                         </div>
@@ -316,7 +370,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Kolumna 2 -->
                 <div class="space-y-10">
                     <div>
@@ -362,7 +416,8 @@
                         <div class="flex justify-between items-center mb-3">
                             <div class="flex items-center gap-3">
                                 <i class="fa-solid fa-wind text-brand text-lg"></i>
-                                <span class="text-white font-bold text-sm uppercase tracking-wide">Tailwind CSS / Bootstrap</span>
+                                <span class="text-white font-bold text-sm uppercase tracking-wide">Tailwind CSS /
+                                    Bootstrap</span>
                             </div>
                             <span class="text-slate-500 text-sm">85%</span>
                         </div>
@@ -386,23 +441,29 @@
             </div>
         </div>
     </section>
-     <!-- PROJEKTY SECTION -->
+    <!-- PROJEKTY SECTION -->
     <section id="projekty" class="py-24">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-end gap-8 mb-16">
                 <div class="max-w-xl">
                     <h2 class="text-4xl md:text-5xl font-bold mb-6">Ostatnie <span class="text-brand">Realizacje</span></h2>
-                    <p class="text-slate-400 text-sm uppercase tracking-widest font-bold">Prezentacja wybranych projektów</p>
+                    <p class="text-slate-400 text-sm uppercase tracking-widest font-bold">Prezentacja wybranych projektów
+                    </p>
                 </div>
-                <a href="#" class="text-brand font-bold border-b border-brand/30 pb-1 hover:border-brand transition-all">Zobacz wszystkie projekty</a>
+                <a href="#"
+                    class="text-brand font-bold border-b border-brand/30 pb-1 hover:border-brand transition-all">Zobacz
+                    wszystkie projekty</a>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                 <!-- Projekt 1 -->
                 <div class="group cursor-pointer">
                     <div class="relative aspect-video rounded-3xl overflow-hidden mb-6">
-                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Project 1">
-                        <div class="absolute inset-0 bg-brand/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                            alt="Project 1">
+                        <div
+                            class="absolute inset-0 bg-brand/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                             <div class="w-16 h-16 bg-white text-black rounded-full flex items-center justify-center">
                                 <i class="fa-solid fa-arrow-up-right-from-square"></i>
                             </div>
@@ -410,7 +471,8 @@
                     </div>
                     <div class="flex justify-between items-center">
                         <div>
-                            <span class="text-brand text-xs font-bold uppercase tracking-wider">Web Design / Development</span>
+                            <span class="text-brand text-xs font-bold uppercase tracking-wider">Web Design /
+                                Development</span>
                             <h4 class="text-2xl font-bold mt-1">Lex Partners Portal</h4>
                         </div>
                     </div>
@@ -418,8 +480,11 @@
                 <!-- Projekt 2 -->
                 <div class="group cursor-pointer">
                     <div class="relative aspect-video rounded-3xl overflow-hidden mb-6">
-                        <img src="https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&q=80&w=1200" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Project 2">
-                        <div class="absolute inset-0 bg-brand/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <img src="https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&q=80&w=1200"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                            alt="Project 2">
+                        <div
+                            class="absolute inset-0 bg-brand/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                             <div class="w-16 h-16 bg-white text-black rounded-full flex items-center justify-center">
                                 <i class="fa-solid fa-arrow-up-right-from-square"></i>
                             </div>
@@ -436,79 +501,87 @@
         </div>
     </section>
     <section class="max-w-7xl mx-auto px-6 py-24">
-	<!-- BLOG PREVIEW (OPCJONALNIE) -->
-    <!-- Siatka postów -->
+        <!-- BLOG PREVIEW (OPCJONALNIE) -->
+        <!-- Siatka postów -->
         <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-                <div>
-                    <h2 class="text-brand font-bold uppercase text-xs tracking-widest mb-3">BLOG</h2>
-                    <h3 class="text-4xl font-bold text-white">Wiedza i aktualności</h3>
-                </div>
-                <a href="{{ route('blog') }}" class="text-brand hover:text-white transition-colors flex items-center gap-2 font-medium">
-                    Zobacz wszystkie wpisy <i class="fa-solid fa-arrow-right"></i>
-                </a>
+            <div>
+                <h2 class="text-brand font-bold uppercase text-xs tracking-widest mb-3">BLOG</h2>
+                <h3 class="text-4xl font-bold text-white">Wiedza i aktualności</h3>
             </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-    @forelse($posts as $post)
-    <article class="blog-card rounded-[2rem] overflow-hidden flex flex-col bg-[#151b2b] border border-white/5 shadow-xl transition-all hover:border-brand/30">
-        
-        <!-- Górna część z obrazkiem -->
-        <div class="relative h-[208px] w-full overflow-hidden">
-            <img src="{{ $post->thumbnail ? asset('storage/' . $post->thumbnail->path) : 'https://via.placeholder.com/600x400' }}" 
-                 alt="{{ $post->title }}" 
-                 class="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000 ease-in-out">
-
-            <!-- Kategoria -->
-            @if(isset($post->category))
-            <div class="absolute top-8 left-8">
-                <span class="bg-black/60 backdrop-blur-xl text-cyan-400 text-[10px] font-black px-5 py-2.5 rounded-2xl border border-white/10 tracking-[0.2em] uppercase shadow-2xl">
-                    {{ strtoupper($post->category) }}
-                </span>
-            </div>
-            @endif
-            
-            <div class="absolute inset-0 bg-gradient-to-t from-[#0f141f] via-transparent to-transparent opacity-90"></div>
+            <a href="{{ route('blog') }}"
+                class="text-brand hover:text-white transition-colors flex items-center gap-2 font-medium">
+                Zobacz wszystkie wpisy <i class="fa-solid fa-arrow-right"></i>
+            </a>
         </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+            @forelse($posts as $post)
+                <article
+                    class="blog-card rounded-[2rem] overflow-hidden flex flex-col bg-[#151b2b] border border-white/5 shadow-xl transition-all hover:border-brand/30">
 
-        <!-- Treść -->
-        <div class="p-10 pt-4">
-            <div class="flex items-center gap-4 text-gray-500 text-[10px] mb-6 font-bold uppercase tracking-widest">
-                <div class="flex items-center gap-2">
-                    <i data-lucide="user" class="w-3 h-3"></i>
-                    {{ $post->user->name ?? 'Admin' }}
-                </div>
-                <span class="opacity-20">/</span>
-                <div class="flex items-center gap-1.5">
-                    <i class="far fa-clock text-cyan-500"></i>
-                    {{ $post->date_public ? \Carbon\Carbon::parse($post->date_public)->format('d M Y') : '---' }}
-                </div>
-            </div>
+                    <!-- Górna część z obrazkiem -->
+                    <div class="relative h-[208px] w-full overflow-hidden">
+                        <img src="{{ $post->thumbnail ? asset('storage/' . $post->thumbnail->path) : 'https://via.placeholder.com/600x400' }}"
+                            alt="{{ $post->title }}"
+                            class="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000 ease-in-out">
 
-            <h3 class="text-white text-xl title-font leading-[1.3] line-clamp-2 min-h-[56px] group-hover:text-cyan-400 transition-colors duration-300">
-                {{ $post->title }}
-            </h3>
+                        <!-- Kategoria -->
+                        @if(isset($post->category))
+                            <div class="absolute top-8 left-8">
+                                <span
+                                    class="bg-black/60 backdrop-blur-xl text-cyan-400 text-[10px] font-black px-5 py-2.5 rounded-2xl border border-white/10 tracking-[0.2em] uppercase shadow-2xl">
+                                    {{ strtoupper($post->category) }}
+                                </span>
+                            </div>
+                        @endif
 
-            <p class="text-gray-500 text-sm leading-relaxed mb-3 line-clamp-3 min-h-[20px]">
-                {{ Str::limit(strip_tags($post->content), 140) }}
-            </p>
-
-            <div class="flex items-center justify-between border-t border-white/[0.05] pt-6">
-                <span class="text-gray-600 text-[10px] uppercase tracking-[0.3em] font-black">{{ $post->read_time ?? '10 MIN READ' }}</span>
-                
-                <a href="{{ route('blog-show', $post->slug) }}" class="group/btn flex items-center gap-4 text-white text-[11px] font-black uppercase tracking-[0.2em] hover:text-cyan-400 transition-all">
-                    CZYTAJ
-                    <div class="w-10 h-10 rounded-2xl bg-white/[0.03] flex items-center justify-center group-hover/btn:bg-cyan-500/20 group-hover/btn:rotate-[45deg] transition-all duration-500">
-                        <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0f141f] via-transparent to-transparent opacity-90">
+                        </div>
                     </div>
-                </a>
-            </div>
+
+                    <!-- Treść -->
+                    <div class="p-10 pt-4">
+                        <div class="flex items-center gap-4 text-gray-500 text-[10px] mb-6 font-bold uppercase tracking-widest">
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="user" class="w-3 h-3"></i>
+                                {{ $post->user->name ?? 'Admin' }}
+                            </div>
+                            <span class="opacity-20">/</span>
+                            <div class="flex items-center gap-1.5">
+                                <i class="far fa-clock text-cyan-500"></i>
+                                {{ $post->date_public ? \Carbon\Carbon::parse($post->date_public)->format('d M Y') : '---' }}
+                            </div>
+                        </div>
+
+                        <h3
+                            class="text-white text-xl title-font leading-[1.3] line-clamp-2 min-h-[56px] group-hover:text-cyan-400 transition-colors duration-300">
+                            {{ $post->title }}
+                        </h3>
+
+                        <p class="text-gray-500 text-sm leading-relaxed mb-3 line-clamp-3 min-h-[20px]">
+                            {{ Str::limit(strip_tags($post->content), 140) }}
+                        </p>
+
+                        <div class="flex items-center justify-between border-t border-white/[0.05] pt-6">
+                            <span
+                                class="text-gray-600 text-[10px] uppercase tracking-[0.3em] font-black">{{ $post->read_time ?? '10 MIN READ' }}</span>
+
+                            <a href="{{ route('blog-show', $post->slug) }}"
+                                class="group/btn flex items-center gap-4 text-white text-[11px] font-black uppercase tracking-[0.2em] hover:text-cyan-400 transition-all">
+                                CZYTAJ
+                                <div
+                                    class="w-10 h-10 rounded-2xl bg-white/[0.03] flex items-center justify-center group-hover/btn:bg-cyan-500/20 group-hover/btn:rotate-[45deg] transition-all duration-500">
+                                    <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            @empty
+                <p class="text-white text-center mt-10">Brak nowych postów.</p>
+            @endforelse
         </div>
-    </article>
-@empty
-    <p class="text-white text-center mt-10">Brak nowych postów.</p>
-@endforelse
-</div>
-</section>
-   
+    </section>
+
 
     <!-- ROZPOCZNIJ PROJEKT -->
     <section class="py-24 bg-darkbg border-t border-slate-800/50">
@@ -518,10 +591,11 @@
                 Skontaktuj się ze mną, a wspólnie stworzymy coś wyjątkowego. <br class="hidden md:block">
                 Odpowiadam zazwyczaj w ciągu 24h.
             </p>
-            <a href="mailto:info@ezcode.pl" class="inline-block bg-brand hover:bg-brand-dark text-white px-10 py-4 rounded-xl font-bold transition-all shadow-xl shadow-brand/20">
+            <a href="mailto:info@ezcode.pl"
+                class="inline-block bg-brand hover:bg-brand-dark text-white px-10 py-4 rounded-xl font-bold transition-all shadow-xl shadow-brand/20">
                 info@ezcode.pl
             </a>
         </div>
     </section>
-   
+
 @endsection
