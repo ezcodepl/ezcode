@@ -17,8 +17,9 @@ Route::get('/post/{post}', [HomeController::class, 'show'])->name('posts.show');
 Route::get('/o-mnie', function () { return view('o-mnie'); })->name('o-mnie');
 Route::get('/oferta', function () { return view('oferta'); })->name('oferta');
 
-Route::get('/projekty', function () { return view('projekty'); })->name('projekty');
-//Route::get('/projekty', [PortfolioController::class, 'view'])->name('projekty.view');
+//Route::get('/projekty', function () { return view('projekty'); })->name('projekty');
+Route::get('/projekty', [PortfolioController::class, 'view'])->name('projekty.view');
+Route::get('/projekty/{id}', [PortfolioController::class, 'view_detail'])->name('projekty-show');
 
 // ADMIN
 Route::get('/admin/portfolio', [PortfolioController::class, 'index'])->name('admin.portfolio');

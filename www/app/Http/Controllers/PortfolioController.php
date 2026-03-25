@@ -115,5 +115,18 @@ class PortfolioController extends Controller
         return view('admin.portfolio.edit', compact('portfolio'));
     }
 
+    public function view()
+{
+    $projects = Portfolio::with('images')->latest()->get();
+
+    return view('projekty', compact('projects'));
+}
+public function view_detail($id)
+{
+    $portfolio = Portfolio::with('images')->findOrFail($id);
+
+    return view('projekty-show', compact('portfolio'));
+}
+
 
 }
