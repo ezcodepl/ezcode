@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers;
 
@@ -6,28 +6,27 @@ use App\Models\Portfolio;
 use App\Models\PortfolioImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
- 
+
 class PortfolioController extends Controller
 {
     // 📄 lista projektów
-    
+
     public function index()
     {
-          $projects = Portfolio::with('images')->latest()->get();
+        $projects = Portfolio::with('images')->latest()->get();
 
-    return view('admin.portfolio.index', compact('projects'));
+        return view('admin.portfolio.index', compact('projects'));
     }
 
     // ➕ dodawanie projektu + zdjęcia
     public function store(Request $request)
     {
-      
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'technology' => 'nullable|string',
             'url' => 'nullable|url',
-            'images.*' => 'image|max:2048'
+            'image_path' => 'nullable|image|max:2048'
         ]);
 
         $portfolio = Portfolio::create($request->only([
@@ -37,16 +36,14 @@ class PortfolioController extends Controller
             'url'
         ]));
 
-        // upload zdjęć
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $path = $image->store('portfolio', 'public');
+        // upload miniatury
+        if ($request->hasFile('image_path')) {
+            $path = $request->file('image_path')->store('portfolio', 'public');
 
-                PortfolioImage::create([
-                    'portfolio_id' => $portfolio->id,
-                    'image_path' => $path
-                ]);
-            }
+            PortfolioImage::create([
+                'portfolio_id' => $portfolio->id,
+                'image_path' => $path
+            ]);
         }
 
         return response()->json($portfolio->load('images'), 201);
@@ -55,7 +52,9 @@ class PortfolioController extends Controller
     // 🔍 jeden projekt
     public function show($id)
     {
-        return Portfolio::with('images')->findOrFail($id);
+        $portfolio = Portfolio::with('images')->findOrFail($id);
+
+        return view('admin.portfolio.show', compact('portfolio'));
     }
 
     // ✏️ update
@@ -63,26 +62,32 @@ class PortfolioController extends Controller
     {
         $portfolio = Portfolio::findOrFail($id);
 
-        $portfolio->update($request->only([
-            'title',
-            'description',
-            'technology',
-            'url'
-        ]));
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'technology' => 'nullable|string',
+            'url' => 'nullable|url',
+            'image_path' => 'nullable|image|max:2048'
+        ]);
 
-        // dodanie nowych zdjęć
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $path = $image->store('portfolio', 'public');
+        $portfolio->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'technology' => $request->technology,
+            'url' => $request->url,
+        ]);
 
-                PortfolioImage::create([
-                    'portfolio_id' => $portfolio->id,
-                    'image_path' => $path
-                ]);
-            }
+        if ($request->hasFile('image_path')) {
+            $path = $request->file('image_path')->store('portfolio', 'public');
+
+            $portfolio->images()->create([
+                'image_path' => $path
+            ]);
         }
 
-        return response()->json($portfolio->load('images'));
+        return redirect()
+            ->route('admin.portfolio.index')
+            ->with('success', 'Projekt został zaktualizowany');
     }
 
     // ❌ usuwanie projektu + zdjęć
@@ -103,4 +108,12 @@ class PortfolioController extends Controller
         // zwraca widok formularza tworzenia projektu
         return view('admin.portfolio.create');
     }
+    public function edit($id)
+    {
+        $portfolio = Portfolio::with('images')->findOrFail($id);
+
+        return view('admin.portfolio.edit', compact('portfolio'));
+    }
+
+
 }

@@ -21,8 +21,8 @@
 
     @auth
         <a href="{{ url('/admin/posts') }}" class="text-sm font-medium text-slate-300 hover:text-brand transition-colors">Posty</a>
-        <a href="{{ url('/portfolio') }}" class="text-sm font-medium text-slate-300 hover:text-brand transition-colors">Portfolio</a>
-        <a href="{{ url('/profile') }}" class="text-sm font-medium text-slate-300 hover:text-brand transition-colors">Profil</a>
+        <a href="{{ url('/admin/portfolio') }}" class="text-sm font-medium text-slate-300 hover:text-brand transition-colors">Portfolio</a>
+        <a href="{{ url('/admin/profile') }}" class="text-sm font-medium text-slate-300 hover:text-brand transition-colors">Profil</a>
 
         <form method="POST" action="{{ route('admin.logout') }}">
             @csrf

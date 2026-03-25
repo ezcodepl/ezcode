@@ -1,13 +1,13 @@
 @extends('layouts.admin')
 
 @section('content')
-<main class="max-w-7xl mx-auto pt-32">
+<main class="max-w-6xl mx-auto pt-32">
 
     <!-- HEADER -->
     <div class="flex flex-col md:flex-row justify-between items-end mb-10 gap-4">
         <div>
             <h1 class="text-4xl font-bold text-white mb-1">Zarządzanie Portfolio</h1>
-            <p class="text-gray-500 font-mono text-xs italic">admin / portfolio / index</p>
+           
         </div>
 
         <a href="{{ route('admin.portfolio.create') }}" 
@@ -23,9 +23,10 @@
                 
                 <!-- HEAD -->
                 <thead>
-                    <tr class="bg-white/5 text-[10px] uppercase tracking-[0.2em] text-gray-500 font-black">
+                    <tr class="bg-white/5 text-[13px] uppercase tracking-[0.2em] text-gray-500 font-black">
                         <th class="px-8 py-6">ID</th>
                         <th class="px-8 py-6">Projekt</th>
+                        <!-- <th class="px-8 py-6 ext-left">Opis</th> -->
                         <th class="px-8 py-6 text-center">Data dodania</th>
                         <th class="px-8 py-6 text-right">Akcje</th>
                     </tr>
@@ -49,7 +50,7 @@
                                     @if($p->images->first())
                                         <img 
                                             src="{{ asset('storage/' . $p->images->first()->image_path) }}" 
-                                            class="w-16 h-12 object-cover rounded-lg border border-white/10"
+                                            class="w-40 h-30 object-cover rounded-lg border border-white/10"
                                         >
                                     @else
                                         <div class="w-16 h-12 flex items-center justify-center bg-white/5 rounded-lg text-xs text-gray-500">
@@ -68,7 +69,10 @@
                                     </div>
                                 </div>
                             </td>
-
+ <!-- DATA -->
+                            <!-- <td class="px-8 py-6 text-left text-gray-400 italic font-mono">
+                                {!! \Illuminate\Support\Str::limit($p->description ?? 'brak opisu', 50, '...') !!}
+                            </td> -->
                             <!-- DATA -->
                             <td class="px-8 py-6 text-center text-gray-400 italic font-mono">
                                 {{ optional($p->created_at)->format('d.m.Y') ?? '-' }}
@@ -118,7 +122,7 @@
         </div>
 
         <!-- STOPKA -->
-        <div class="bg-white/2 p-6 flex justify-between items-center text-xs text-gray-500">
+        <div class="bg-white/2 p-6 flex justify-between items-center text-gray-500">
             <span>
                 Łącznie projektów: {{ $projects->count() }}
             </span>

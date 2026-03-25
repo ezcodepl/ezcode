@@ -28,6 +28,9 @@ Route::get('/admin/portfolio/{id}/edit', [PortfolioController::class, 'edit'])->
 Route::put('/admin/portfolio/{id}', [PortfolioController::class, 'update'])->name('admin.portfolio.update');
 Route::delete('/admin/portfolio/{id}', [PortfolioController::class, 'destroy'])->name('admin.portfolio.delete');
 Route::get('/admin/portfolio/{id}', [PortfolioController::class, 'show'])->name('admin.portfolio.show');
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('portfolio', PortfolioController::class);
+});
 
 //Route::get('/blog', function () { return view('blog'); })->name('blog');
 Route::get('/blog', function () {
