@@ -18,6 +18,15 @@ Route::get('/o-mnie', function () { return view('o-mnie'); })->name('o-mnie');
 Route::get('/oferta', function () { return view('oferta'); })->name('oferta');
 
 Route::get('/projekty', function () { return view('projekty'); })->name('projekty');
+//Route::get('/projekty', [PortfolioController::class, 'view'])->name('projekty.view');
+
+// ADMIN
+Route::get('/admin/portfolio', [PortfolioController::class, 'index'])->name('admin.portfolio');
+Route::get('/admin/portfolio/create', [PortfolioController::class, 'create'])->name('admin.portfolio.create');
+Route::post('/admin/portfolio', [PortfolioController::class, 'store'])->name('admin.portfolio.store');
+Route::get('/admin/portfolio/{id}/edit', [PortfolioController::class, 'edit'])->name('admin.portfolio.edit');
+Route::put('/admin/portfolio/{id}', [PortfolioController::class, 'update'])->name('admin.portfolio.update');
+Route::delete('/admin/portfolio/{id}', [PortfolioController::class, 'destroy'])->name('admin.portfolio.delete');
 
 //Route::get('/blog', function () { return view('blog'); })->name('blog');
 Route::get('/blog', function () {

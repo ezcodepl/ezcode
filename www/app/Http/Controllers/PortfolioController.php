@@ -10,14 +10,18 @@ use Illuminate\Support\Facades\Storage;
 class PortfolioController extends Controller
 {
     // 📄 lista projektów
+    
     public function index()
     {
-        return Portfolio::with('images')->latest()->get();
+          $projects = Portfolio::with('images')->latest()->get();
+
+    return view('admin.portfolio.index', compact('projects'));
     }
 
     // ➕ dodawanie projektu + zdjęcia
     public function store(Request $request)
     {
+      
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
@@ -93,5 +97,10 @@ class PortfolioController extends Controller
         $portfolio->delete();
 
         return response()->json(['message' => 'Deleted']);
+    }
+    public function create()
+    {
+        // zwraca widok formularza tworzenia projektu
+        return view('admin.portfolio.create');
     }
 }

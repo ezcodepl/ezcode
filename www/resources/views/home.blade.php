@@ -13,75 +13,60 @@
         <div id="hero-slider" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
 
             <!-- Slajd 1: Programowanie -->
-<div class="slide active">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        
-        <!-- LEFT -->
-        <div>
-            <div class="inline-flex items-center px-4 py-1.5 rounded-full border border-brand/20 bg-brand/10 text-brand text-xs font-medium mb-6">
-                <i class="fa-solid fa-terminal mr-2"></i> Dostępny do współpracy
-            </div>
-
-            <h1 class="text-5xl md:text-7xl font-extrabold leading-[1.1] mb-6">
-                Witaj, jestem <br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand to-purple-400">
-                    Full Stack
-                </span><br>
-                Developerem.
-            </h1>
-
-            <p class="text-slate-400 text-lg mb-8 max-w-lg leading-relaxed">
-                Projektuję i koduję nowoczesne, w pełni responsywne aplikacje webowe oraz strony internetowe.
-                Zmieniam pomysły w działający kod.
-            </p>
-
-            <div class="flex flex-wrap gap-4">
-                <a href="#projekty"
-                    class="bg-brand hover:bg-brand-dark text-white px-8 py-4 rounded-xl font-bold transition-all shadow-lg shadow-brand/25 flex items-center">
-                    Moje realizacje <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
-                </a>
-
-                <button
-                    class="bg-[#1e293b] hover:bg-slate-700 text-white px-8 py-4 rounded-xl font-bold transition-all flex items-center border border-slate-700">
-                    <i class="fa-brands fa-github mr-2 text-xl"></i> GitHub
-                </button>
-            </div>
-        </div>
-
-        <!-- RIGHT -->
-        <div class="hidden lg:flex justify-center">
-            <div class="w-full max-w-lg">
-                
-                <div class="bg-[#1e293b] rounded-2xl p-4 shadow-2xl border border-slate-800 transform rotate-1 hover:rotate-0 transition duration-700">
-                    
-                    <!-- top bar -->
-                    <div class="flex gap-1.5 mb-4 px-1">
-                        <div class="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
-                        <div class="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
-                        <div class="w-3 h-3 rounded-full bg-[#27c93f]"></div>
+            <div class="slide active">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <div
+                            class="inline-flex items-center px-4 py-1.5 rounded-full border border-brand/20 bg-brand/10 text-brand text-xs font-medium mb-6">
+                            <i class="fa-solid fa-terminal mr-2"></i> Dostępny do współpracy
+                        </div>
+                        <h1 class="text-5xl md:text-7xl font-extrabold leading-[1.1] mb-6">
+                            Witaj, jestem <br>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand to-purple-400">Full
+                                Stack</span><br>
+                            Developerem.
+                        </h1>
+                        <p class="text-slate-400 text-lg mb-8 max-w-lg leading-relaxed">
+                            Projektuję i koduję nowoczesne, w pełni responsywne aplikacje webowe oraz strony internetowe.
+                            Zmieniam pomysły w działający kod.
+                        </p>
+                        <div class="flex flex-wrap gap-4">
+                            <a href="#projekty"
+                                class="bg-brand hover:bg-brand-dark text-white px-8 py-4 rounded-xl font-bold transition-all shadow-lg shadow-brand/25 flex items-center">
+                                Moje realizacje <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+                            </a>
+                            <button
+                                class="bg-[#1e293b] hover:bg-slate-700 text-white px-8 py-4 rounded-xl font-bold transition-all flex items-center border border-slate-700">
+                                <i class="fa-brands fa-github mr-2 text-xl"></i> GitHub
+                            </button>
+                        </div>
                     </div>
-
-                    <!-- code -->
-                    <div class="code-font text-sm bg-[#0f172a] rounded-lg p-3">
-<pre class="text-slate-300 m-0 leading-relaxed"><span class="text-purple-400">const</span> <span class="text-blue-400">developer</span> = {
-  <span class="text-brand">name</span>: <span class="text-green-300">'ezCode'</span>,
-  <span class="text-brand">role</span>: <span class="text-green-300">'Full Stack Web Developer'</span>,
-  <span class="text-brand">skills</span>: [<span class="text-green-300">'PHP'</span>, <span class="text-green-300">'JavaScript'</span>, <span class="text-green-300">'Tailwind'</span>],
-  <span class="text-brand">responsive</span>: <span class="text-orange-400">true</span>,
-  <span class="text-brand">buildWebsite</span>: <span class="text-purple-400">function</span>() {
-    <span class="text-slate-500">// Zmieniam pomysły w rzeczywistość</span>
-    <span class="text-blue-400">return</span> <span class="text-green-300">'Sukces!'</span>;
-  }
-};</pre>
+                    <div class="hidden lg:block relative max-w-xl mx-auto">
+                        <div
+                            class="bg-[#1e293b] rounded-2xl p-5 shadow-2xl border border-slate-800 transform rotate-1 hover:rotate-0 transition-transform duration-700">
+                            <div class="flex gap-1.5 mb-5 px-1">
+                                <div class="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
+                                <div class="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
+                                <div class="w-3 h-3 rounded-full bg-[#27c93f]"></div>
+                            </div>
+                            <div class="code-font text-sm leading-relaxed p-4 bg-[#0f172a] rounded-lg">
+  <pre class="text-slate-300">
+  <span class="text-purple-400">const</span> <span class="text-blue-400">developer</span> = {
+       <span class="text-brand">name</span>: <span class="text-green-300">'ezCode'</span>,
+       <span class="text-brand">role</span>: <span class="text-green-300">'Full Stack Web Developer'</span>,
+       <span class="text-brand">skills</span>: [<span class="text-green-300">'PHP'</span>, <span class="text-green-300">'JavaScript'</span>, <span class="text-green-300">'Tailwind'</span>],
+       <span class="text-brand">responsive</span>: <span class="text-orange-400">true</span>,
+       <span class="text-brand">buildWebsite</span>: <span class="text-purple-400">function</span>() {
+       <span class="text-slate-500">// Zmieniam pomysły w rzeczywistość</span>
+      <span class="text-blue-400">return</span> <span class="text-green-300">'Sukces!'</span>;
+       }
+     };
+                                    </pre>
+                            </div>                              
+                        </div>
                     </div>
-
                 </div>
-
             </div>
-        </div>
-
-    </div>
-</div>
 
             <!-- Slajd 2: E-commerce -->
             <div class="slide">
@@ -109,7 +94,7 @@
                         </div>
                     </div>
                     <div class="hidden lg:block relative">
-                        <div
+                        <!-- <div
                             class="bg-cardbg rounded-2xl p-8 border border-slate-800 shadow-2xl relative overflow-hidden group">
                             <div class="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 blur-3xl rounded-full"></div>
                             <div class="flex flex-col gap-6">
@@ -134,7 +119,64 @@
                                     <div class="w-full bg-brand/50 h-2/3 rounded-t-sm"></div>
                                 </div>
                             </div>
+                        </div> -->
+                        <!-- PRAWA STRONA: Modern Dashboard Interface (Przemodelowana) -->
+        <div class="relative w-full max-w-[550px] flex items-center justify-center">
+            
+            <!-- Główny Kontener (bazujący na przesłanym kodzie) -->
+            <div class="w-[420px] bg-[#141624]/70 rounded-2xl p-8 border border-slate-800 shadow-2xl relative overflow-hidden group backdrop-blur-xl z-10">
+                <!-- Efekt poświaty wewnątrz -->
+                <div class="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 blur-3xl rounded-full transition-all group-hover:bg-purple-500/20"></div>
+                
+                <div class="flex flex-col gap-6 relative z-10">
+                    <!-- Karta Statusu -->
+                    <div class="flex items-center justify-between p-4 bg-[#0b0d17]/50 rounded-xl border border-white/5 transition-colors hover:border-white/10">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded bg-purple-500/20 flex items-center justify-center text-purple-400">
+                                <i class="fa-solid fa-box"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm font-bold text-white">Nowe zamówienie</div>
+                                <div class="text-xs text-slate-500">#4521 - 249.00 zł</div>
+                            </div>
                         </div>
+                        <div class="text-xs text-green-400 font-bold bg-green-400/10 px-2 py-1 rounded">+12% dzisiaj</div>
+                    </div>
+
+                    <!-- Wykres Słupkowy -->
+                    <div class="h-32 w-full bg-[#0b0d17]/50 rounded-xl border border-white/5 flex items-end p-4 gap-2">
+                        <div class="w-full bg-purple-500/40 h-1/2 rounded-t-sm transition-all hover:bg-purple-500/60 cursor-pointer"></div>
+                        <div class="w-full bg-purple-500/60 h-3/4 rounded-t-sm transition-all hover:bg-purple-500/80 cursor-pointer"></div>
+                        <div class="w-full bg-gradient-to-t from-purple-600 to-pink-500 h-full rounded-t-sm shadow-[0_0_15px_rgba(168,85,247,0.3)]"></div>
+                        <div class="w-full bg-purple-500/50 h-2/3 rounded-t-sm transition-all hover:bg-purple-500/70 cursor-pointer"></div>
+                        <div class="w-full bg-purple-500/30 h-1/3 rounded-t-sm transition-all hover:bg-purple-500/50 cursor-pointer"></div>
+                    </div>
+
+                    <!-- Dodatkowe statystyki -->
+                    <div class="flex justify-between items-center px-1">
+                        <div class="flex flex-col">
+                            <span class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Aktywne sesje</span>
+                            <span class="text-lg font-bold text-white">1,420</span>
+                        </div>
+                        <div class="w-px h-8 bg-white/5"></div>
+                        <div class="flex flex-col">
+                            <span class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Konwersja</span>
+                            <span class="text-lg font-bold text-white">4.2%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pływająca karta użytkownika (dodająca głębi) -->
+            <div class="absolute -bottom-6 -left-8 w-[200px] flex items-center gap-3 p-3 rounded-2xl bg-[#1e2032]/80 backdrop-blur-md border border-white/10 shadow-2xl z-20 animate-float">
+                <div class="w-9 h-9 bg-gradient-to-br from-indigo-600 to-purple-500 rounded-xl flex items-center justify-center font-bold text-xs text-white">MK</div>
+                <div>
+                    <p class="text-sm font-bold text-white">Marek Kowalski</p>
+                    <p class="text-[10px] text-green-400 font-bold">Właśnie kupił!</p>
+                </div>
+            </div>
+            
+        </div>
                     </div>
                 </div>
             </div>
@@ -165,7 +207,7 @@
                         </div>
                     </div>
                     <div class="hidden lg:block relative">
-                        <div class="grid grid-cols-2 gap-4">
+                        <!-- <div class="grid grid-cols-2 gap-4">
                             <div class="bg-cardbg p-6 rounded-2xl border border-slate-800 shadow-xl">
                                 <div
                                     class="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 mb-4">
@@ -180,7 +222,84 @@
                                 <div class="text-2xl font-bold text-white">&lt; 1s</div>
                                 <div class="text-xs text-slate-500">Czas ładowania strony</div>
                             </div>
+                        </div> -->
+                        <!-- Prawa Strona: Wizualizacja Infrastruktury -->
+                <div class="hidden lg:block relative">
+                    <!-- Tło dekoracyjne -->
+                    <div class="absolute -top-20 -right-20 w-96 h-96 bg-emerald-500/10 rounded-full blur-[100px]"></div>
+                    
+                    <div class="floating relative z-20 space-y-6">
+                        
+                        <!-- Karta Docker Engine -->
+                        <div class="glass-card rounded-3xl p-6 border-l-4 border-l-blue-500">
+                            <div class="flex items-center justify-between mb-6">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 bg-blue-500/20 rounded-xl flex items-center justify-center text-blue-400">
+                                        <i class="fa-brands fa-docker text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm font-bold">Docker Infrastructure</div>
+                                        <div class="text-[10px] text-slate-500 font-mono">CONTAINER_ORCHESTRATION</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between p-3 bg-white/5 rounded-xl border border-white/5">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fa-brands fa-laravel text-red-500"></i>
+                                        <span class="text-xs font-mono">Laravel Application</span>
+                                    </div>
+                                    <span class="text-[9px] text-emerald-400 font-bold">RUNNING</span>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-white/5 rounded-xl border border-white/5">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fa-brands fa-python text-blue-400"></i>
+                                        <span class="text-xs font-mono">Django Core Engine</span>
+                                    </div>
+                                    <span class="text-[9px] text-emerald-400 font-bold">RUNNING</span>
+                                </div>
+                            </div>
                         </div>
+
+                        <!-- Karta Bazy Danych -->
+                        <div class="glass-card rounded-3xl p-6 border-l-4 border-l-emerald-500 ml-12">
+                            <div class="flex items-center gap-3 mb-6">
+                                <div class="w-10 h-10 bg-emerald-500/20 rounded-xl flex items-center justify-center text-emerald-400">
+                                    <i class="fa-solid fa-database"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm font-bold">Relational Databases</div>
+                                    <div class="text-[10px] text-slate-500 font-mono">STORAGE_LAYER</div>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-slate-900/80 p-4 rounded-2xl border border-white/5 flex flex-col items-center">
+                                    <img src="https://www.mysql.com/common/logos/logo-mysql-170x115.png" class="w-12 h-8 object-contain grayscale invert opacity-50 mb-2" alt="MySQL">
+                                    <span class="text-[10px] font-mono text-slate-400">MySQL 8.x</span>
+                                </div>
+                                <div class="bg-slate-900/80 p-4 rounded-2xl border border-white/5 flex flex-col items-center">
+                                    <img src="https://wiki.postgresql.org/images/a/a4/PostgreSQL_logo.3colors.svg" class="w-12 h-8 object-contain grayscale invert opacity-50 mb-2" alt="PostgreSQL">
+                                    <span class="text-[10px] font-mono text-slate-400">PostgreSQL</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pływający Code Snippet (Docker Compose) -->
+                        <div class="absolute -bottom-6 -right-6 glass-card p-5 rounded-2xl floating shadow-2xl" style="animation-delay: -2s;">
+                            <div class="font-mono text-[10px] text-slate-400 space-y-1">
+                                <div class="text-blue-400">version: '3.8'</div>
+                                <div class="text-emerald-500">services:</div>
+                                <div class="pl-2 text-slate-300">app_laravel:</div>
+                                <div class="pl-4">build: ./laravel</div>
+                                <div class="pl-2 text-slate-300">db_postgres:</div>
+                                <div class="pl-4">image: postgres:alpine</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
                     </div>
                 </div>
             </div>

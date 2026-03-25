@@ -41,6 +41,32 @@
         
         .dot { cursor: pointer; height: 10px; width: 10px; margin: 0 5px; background-color: rgba(255,255,255,0.2); border-radius: 50%; display: inline-block; transition: all 0.3s ease; }
         .dot.active { background-color: #0ea5e9; width: 25px; border-radius: 5px; }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(0.5deg); }
+        }
+
+        .gradient-bg {
+            background: radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.12) 0%, transparent 40%),
+                        radial-gradient(circle at 20% 80%, rgba(14, 165, 233, 0.08) 0%, transparent 40%);
+        }
+
+        .text-gradient {
+            background: linear-gradient(to r, #34d399, #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
     </style>
     @stack('styles')
 </head>
