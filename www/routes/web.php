@@ -27,6 +27,7 @@ Route::post('/admin/portfolio', [PortfolioController::class, 'store'])->name('ad
 Route::get('/admin/portfolio/{id}/edit', [PortfolioController::class, 'edit'])->name('admin.portfolio.edit');
 Route::put('/admin/portfolio/{id}', [PortfolioController::class, 'update'])->name('admin.portfolio.update');
 Route::delete('/admin/portfolio/{id}', [PortfolioController::class, 'destroy'])->name('admin.portfolio.delete');
+Route::get('/admin/portfolio/{id}', [PortfolioController::class, 'show'])->name('admin.portfolio.show');
 
 //Route::get('/blog', function () { return view('blog'); })->name('blog');
 Route::get('/blog', function () {

@@ -62,7 +62,7 @@
                     </section>
 
                     <section class="bg-[#111827] rounded-3xl p-1 border border-white/5 overflow-hidden">
-                        <textarea name="content" id="ezcode-editor"></textarea>
+                        <textarea name="description" id="ezcode-editor"></textarea>
                     </section>
                     <div class="flex items-center justify-end gap-4 pt-4 border-t border-white/5">
                     <button type="reset"
