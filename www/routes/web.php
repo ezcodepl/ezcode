@@ -1,77 +1,84 @@
 <?php
 
-
-use App\Http\Controllers\PortfolioController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PortfolioController;
 
-Route::get('/', [HomeController::class, 'index']);// Frontend - widok pojedynczego posta
-Route::get('/post/{post}', [HomeController::class, 'show'])->name('posts.show');
+/*
+|--------------------------------------------------------------------------
+| Frontend Routes
+|--------------------------------------------------------------------------
+*/
+
 // Strona główna
-// Route::get('/', function () {
-//     return view('home');
-// })->name('home');
-Route::get('/o-mnie', function () { return view('o-mnie'); })->name('o-mnie');
-Route::get('/oferta', function () { return view('oferta'); })->name('oferta');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-//Route::get('/projekty', function () { return view('projekty'); })->name('projekty');
+// Pojedynczy post
+Route::get('/post/{post}', [HomeController::class, 'show'])->name('posts.show');
+
+// Statyczne strony
+Route::view('/o-mnie', 'o-mnie')->name('o-mnie');
+Route::view('/oferta', 'oferta')->name('oferta');
+
+// Portfolio - frontend
 Route::get('/projekty', [PortfolioController::class, 'view'])->name('projekty.view');
 Route::get('/projekty/{id}', [PortfolioController::class, 'view_detail'])->name('projekty-show');
 
-// ADMIN
-Route::get('/admin/portfolio', [PortfolioController::class, 'index'])->name('admin.portfolio');
-Route::get('/admin/portfolio/create', [PortfolioController::class, 'create'])->name('admin.portfolio.create');
-Route::post('/admin/portfolio', [PortfolioController::class, 'store'])->name('admin.portfolio.store');
-Route::get('/admin/portfolio/{id}/edit', [PortfolioController::class, 'edit'])->name('admin.portfolio.edit');
-Route::put('/admin/portfolio/{id}', [PortfolioController::class, 'update'])->name('admin.portfolio.update');
-Route::delete('/admin/portfolio/{id}', [PortfolioController::class, 'destroy'])->name('admin.portfolio.delete');
-Route::get('/admin/portfolio/{id}', [PortfolioController::class, 'show'])->name('admin.portfolio.show');
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::resource('portfolio', PortfolioController::class);
-});
-
-//Route::get('/blog', function () { return view('blog'); })->name('blog');
-Route::get('/blog', function () {
-    $posts = \App\Models\Post::all();
-    return view('blog', ['posts' => $posts]);
-});
-
-
-Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog-show');
+// Blog - frontend
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
+Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog-show');
 
-// Dashboard (auth + verified)
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
-// Profile (auth)
+/*
+|--------------------------------------------------------------------------
+| Dashboard & Profile Routes (auth)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Auth routes
+/*
+|--------------------------------------------------------------------------
+| Auth Routes
+|--------------------------------------------------------------------------
+*/
 require __DIR__.'/auth.php';
 
 
-
-// Admin routes (auth + admin)
+/*
+|--------------------------------------------------------------------------
+| Admin Routes (auth + admin)
+|--------------------------------------------------------------------------
+*/
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+
+    // Portfolio CRUD
+    Route::resource('portfolio', PortfolioController::class);
+
+    // Posts CRUD
     Route::get('posts', [PostController::class, 'adminIndex'])->name('posts.index');
     Route::get('posts/create', [PostController::class, 'create'])->name('posts.create');
     Route::post('posts', [PostController::class, 'store'])->name('posts.store');
     Route::get('posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
-      Route::get('posts/{post}/show', [PostController::class, 'show'])->name('posts.show');
+    Route::get('posts/{post}/show', [PostController::class, 'show'])->name('posts.show');
     Route::put('posts/{post}', [PostController::class, 'update'])->name('posts.update');
     Route::delete('posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 
     Route::post('posts/upload-image', [PostController::class, 'uploadImage'])->name('posts.uploadImage');
 
+    // Admin logout
     Route::post('logout', function () {
         auth()->logout();
         request()->session()->invalidate();

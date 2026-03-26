@@ -18,6 +18,11 @@ return new class extends Migration {
 
             $table->string('url')->nullable();
 
+            // nowe kolumny na obrazy
+            $table->string('image_desktop')->nullable();
+            $table->string('image_tablet')->nullable();
+            $table->string('image_mobile')->nullable();
+
             $table->timestamps();
         });
     }

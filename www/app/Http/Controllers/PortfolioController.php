@@ -3,18 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Portfolio;
-use App\Models\PortfolioImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class PortfolioController extends Controller
 {
     // 📄 lista projektów
-
     public function index()
     {
-        $projects = Portfolio::with('images')->latest()->get();
-
+        $projects = Portfolio::latest()->get();
         return view('admin.portfolio.index', compact('projects'));
     }
 
@@ -26,34 +23,30 @@ class PortfolioController extends Controller
             'description' => 'required|string',
             'technology' => 'nullable|string',
             'url' => 'nullable|url',
-            'image_path' => 'nullable|image|max:2048'
+            'image_desktop' => 'nullable|image|max:2048',
+            'image_tablet' => 'nullable|image|max:2048',
+            'image_mobile' => 'nullable|image|max:2048',
         ]);
 
-        $portfolio = Portfolio::create($request->only([
-            'title',
-            'description',
-            'technology',
-            'url'
-        ]));
+        $data = $request->only(['title', 'description', 'technology', 'url']);
 
-        // upload miniatury
-        if ($request->hasFile('image_path')) {
-            $path = $request->file('image_path')->store('portfolio', 'public');
-
-            PortfolioImage::create([
-                'portfolio_id' => $portfolio->id,
-                'image_path' => $path
-            ]);
+        // obsługa uploadu plików
+        foreach (['desktop', 'tablet', 'mobile'] as $type) {
+            $inputName = "image_$type";
+            if ($request->hasFile($inputName)) {
+                $data[$inputName] = $request->file($inputName)->store('portfolio_images', 'public');
+            }
         }
 
-        return response()->json($portfolio->load('images'), 201);
+        $portfolio = Portfolio::create($data);
+
+        return response()->json($portfolio, 201);
     }
 
     // 🔍 jeden projekt
     public function show($id)
     {
-        $portfolio = Portfolio::with('images')->findOrFail($id);
-
+        $portfolio = Portfolio::findOrFail($id);
         return view('admin.portfolio.show', compact('portfolio'));
     }
 
@@ -67,23 +60,26 @@ class PortfolioController extends Controller
             'description' => 'required|string',
             'technology' => 'nullable|string',
             'url' => 'nullable|url',
-            'image_path' => 'nullable|image|max:2048'
+            'image_desktop' => 'nullable|image|max:2048',
+            'image_tablet' => 'nullable|image|max:2048',
+            'image_mobile' => 'nullable|image|max:2048',
         ]);
 
-        $portfolio->update([
-            'title' => $request->title,
-            'description' => $request->description,
-            'technology' => $request->technology,
-            'url' => $request->url,
-        ]);
+        $data = $request->only(['title', 'description', 'technology', 'url']);
 
-        if ($request->hasFile('image_path')) {
-            $path = $request->file('image_path')->store('portfolio', 'public');
-
-            $portfolio->images()->create([
-                'image_path' => $path
-            ]);
+        // obsługa nowych obrazów
+        foreach (['desktop', 'tablet', 'mobile'] as $type) {
+            $inputName = "image_$type";
+            if ($request->hasFile($inputName)) {
+                // usuń stary plik jeśli istnieje
+                if ($portfolio->$inputName) {
+                    Storage::disk('public')->delete($portfolio->$inputName);
+                }
+                $data[$inputName] = $request->file($inputName)->store('portfolio_images', 'public');
+            }
         }
+
+        $portfolio->update($data);
 
         return redirect()
             ->route('admin.portfolio.index')
@@ -93,40 +89,40 @@ class PortfolioController extends Controller
     // ❌ usuwanie projektu + zdjęć
     public function destroy($id)
     {
-        $portfolio = Portfolio::with('images')->findOrFail($id);
+        $portfolio = Portfolio::findOrFail($id);
 
-        foreach ($portfolio->images as $image) {
-            Storage::disk('public')->delete($image->image_path);
+        // usuń wszystkie pliki
+        foreach (['image_desktop', 'image_tablet', 'image_mobile'] as $img) {
+            if ($portfolio->$img) {
+                Storage::disk('public')->delete($portfolio->$img);
+            }
         }
 
         $portfolio->delete();
 
         return response()->json(['message' => 'Deleted']);
     }
+
     public function create()
     {
-        // zwraca widok formularza tworzenia projektu
         return view('admin.portfolio.create');
     }
+
     public function edit($id)
     {
-        $portfolio = Portfolio::with('images')->findOrFail($id);
-
+        $portfolio = Portfolio::findOrFail($id);
         return view('admin.portfolio.edit', compact('portfolio'));
     }
 
     public function view()
     {
-        $projects = Portfolio::with('images')->latest()->paginate(6);
-
+        $projects = Portfolio::latest()->paginate(6);
         return view('projekty', compact('projects'));
     }
+
     public function view_detail($id)
     {
-        $portfolio = Portfolio::with('images')->findOrFail($id);
-
+        $portfolio = Portfolio::findOrFail($id);
         return view('projekty-show', compact('portfolio'));
     }
-
-
 }

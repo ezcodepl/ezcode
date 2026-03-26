@@ -21,19 +21,6 @@
         border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    /* Kluczowa klasa dopasowująca zdjęcie projektu do ramek urządzeń */
-    .device-screen-bg {
-        background-image: url("{{ asset('storage/' . ($portfolio->images->first()->image_path ?? 'default.jpg')) }}");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-    }
-
     .screen-glare::after {
         content: '';
         position: absolute;
@@ -49,7 +36,24 @@
     .project-gradient-overlay {
         background: linear-gradient(to bottom, rgba(15, 23, 42, 0.2), rgba(15, 23, 42, 0.6));
     }
+
+    .device-screen-bg {
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
 </style>
+
+@php
+    $desktopImage = $portfolio->getImageUrl('desktop') ?? 'https://via.placeholder.com/1200x800?text=Brak+zdjecia';
+    $tabletImage  = $portfolio->getImageUrl('tablet')  ?? 'https://via.placeholder.com/800x600?text=Brak+zdjecia';
+    $mobileImage  = $portfolio->getImageUrl('mobile')  ?? 'https://via.placeholder.com/400x800?text=Brak+zdjecia';
+@endphp
 
 <div class="min-h-screen bg-darkbg text-gray-300 font-sans selection:bg-brand selection:text-white pt-32">
     <div class="max-w-7xl mx-auto p-6 lg:p-12">
@@ -57,8 +61,7 @@
         <!-- HEADER -->
         <header class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-16">
             <div>
-                
-                <h1 class="text-5xl font-black tracking-tighter mb-4 text-white">{{ $portfolio->title }}</h1>
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">{{ $portfolio->title }}</h1>
                 <div class="flex gap-2 flex-wrap">
                     @if($portfolio->technology)
                         @foreach(explode(',', $portfolio->technology) as $tech)
@@ -77,18 +80,15 @@
         <!-- GŁÓWNA SCENA URZĄDZEŃ -->
         <div class="relative w-full h-[550px] flex items-center justify-center mb-24">
 
-            <!-- MONITOR DESKTOP (Tło sceny) -->
+            <!-- MONITOR DESKTOP -->
             <div class="absolute left-1/2 -translate-x-1/2 top-0 w-[80%] aspect-[16/10] bg-slate-900 rounded-[2.5rem] p-3 shadow-2xl border border-white/5 z-10 opacity-90 scale-95 lg:scale-100">
                 <div class="w-full h-full rounded-3xl overflow-hidden relative screen-glare">
-                    <div class="device-screen-bg"></div>
+                    <div class="device-screen-bg" style="background-image: url('{{ $desktopImage }}')"></div>
                     <div class="absolute inset-0 project-gradient-overlay"></div>
-                    
                     <div class="p-12 h-full flex flex-col justify-end relative z-20">
-                        <h3 class="text-4xl font-black mb-2 text-white">Desktop Version</h3>
+                        <h3 class="text-4xl font-black mb-2 text-white">Komputer</h3>
                         <p class="text-sky-200/60 text-sm max-w-xs uppercase tracking-widest">System {{ $portfolio->title }}</p>
                     </div>
-
-                    <!-- Browser Header Mockup -->
                     <div class="absolute top-0 left-0 right-0 h-8 bg-black/20 backdrop-blur-md flex items-center px-6 gap-2 z-30">
                         <div class="flex gap-1.5">
                             <div class="w-2.5 h-2.5 rounded-full bg-red-500/20"></div>
@@ -99,23 +99,23 @@
                 </div>
             </div>
 
-            <!-- TABLET (Poziomo) -->
+            <!-- TABLET -->
             <div class="absolute -bottom-4 right-[0%] w-[42%] aspect-[16/10] bg-[#0a0a0a] rounded-[1.8rem] p-2.5 shadow-[0_30px_60px_rgba(0,0,0,0.8)] border border-white/10 z-30 transition-transform hover:-translate-y-2 duration-500 hidden md:block">
                 <div class="w-full h-full rounded-2xl overflow-hidden relative screen-glare">
-                    <div class="device-screen-bg"></div>
+                    <div class="device-screen-bg" style="background-image: url('{{ $tabletImage }}')"></div>
                     <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                     <div class="p-6 h-full flex flex-col justify-end relative z-20 text-right">
-                        <h3 class="text-xl font-bold text-white">Tablet View</h3>
+                        <h3 class="text-xl font-bold text-white">Tablet</h3>
                         <p class="text-[10px] text-white/50 uppercase tracking-widest">Responsive UI</p>
                     </div>
                 </div>
                 <div class="absolute top-1/2 -left-1 -translate-y-1/2 w-0.5 h-4 bg-white/10 rounded-full"></div>
             </div>
 
-            <!-- iPHONE 16 PRO MAX -->
+            <!-- MOBILE -->
             <div class="absolute -bottom-12 left-[5%] w-[20%] aspect-[9/19.5] bg-[#0f0f0f] rounded-[3.2rem] p-2.5 shadow-[0_40px_80px_rgba(0,0,0,0.9)] border border-white/20 z-40 transition-transform hover:-translate-y-4 duration-500 hidden sm:block">
                 <div class="w-full h-full rounded-[2.8rem] overflow-hidden relative screen-glare">
-                    <div class="device-screen-bg"></div>
+                    <div class="device-screen-bg" style="background-image: url('{{ $mobileImage }}')"></div>
                     <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60"></div>
                     
                     <!-- DYNAMIC ISLAND -->
@@ -127,10 +127,9 @@
                         <div class="w-10 h-10 rounded-2xl glass flex items-center justify-center mb-4">
                             <i class="fas fa-mobile-alt text-white/80"></i>
                         </div>
-                        <h3 class="text-[10px] font-black leading-tight tracking-tighter text-white">{{ strtoupper($portfolio->title) }}<br>PRO MAX</h3>
+                        <h3 class="text-[10px] font-black leading-tight tracking-tighter text-white">{{ strtoupper($portfolio->title) }}</h3>
                     </div>
                 </div>
-                <!-- Przycisk boczny -->
                 <div class="absolute top-32 -right-1 w-1 h-16 bg-white/10 rounded-r-md"></div>
             </div>
 
