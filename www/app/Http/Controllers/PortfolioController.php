@@ -116,17 +116,17 @@ class PortfolioController extends Controller
     }
 
     public function view()
-{
-    $projects = Portfolio::with('images')->latest()->get();
+    {
+        $projects = Portfolio::with('images')->latest()->paginate(6);
 
-    return view('projekty', compact('projects'));
-}
-public function view_detail($id)
-{
-    $portfolio = Portfolio::with('images')->findOrFail($id);
+        return view('projekty', compact('projects'));
+    }
+    public function view_detail($id)
+    {
+        $portfolio = Portfolio::with('images')->findOrFail($id);
 
-    return view('projekty-show', compact('portfolio'));
-}
+        return view('projekty-show', compact('portfolio'));
+    }
 
 
 }
