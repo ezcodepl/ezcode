@@ -35,13 +35,20 @@
 @endif
             </div>
 
-            <h1 class="text-4xl md:text-6xl font-black text-white tracking-tight leading-none">
-                {{ $post->title }}
-            </h1>
-            
-            <p class="text-lg text-gray-400 font-medium max-w-2xl italic">
-                {{ $post->excerpt ?? 'Brak krótkiego opisu posta.' }}
-            </p>
+             <h1 class="text-5xl lg:text-4xl font-extrabold mb-4 tracking-tighter">
+        
+        @php
+            $words = explode(' ', $post->title);
+            $half = ceil(count($words) / 2);
+            $firstPart = implode(' ', array_slice($words, 0, $half));
+            $secondPart = implode(' ', array_slice($words, $half));
+        @endphp
+
+        {{ $firstPart }}<span class="text-transparent bg-clip-text bg-gradient-to-r from-brand to-purple-500"> {{ $secondPart }}</span>
+    </h1>
+        <p class="text-gray-400 text-lg max-w-2xl leading-relaxed">
+            {{ $post->excerpt }}
+        </p>
         </div>
         
         <div class="flex items-center gap-3 self-start md:self-end">
@@ -154,7 +161,7 @@
                 </div>
 
                 <!-- Timeline -->
-                <div class="space-y-6">
+                <div class="space-y-6 mt-6">
                     <h4 class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">Oś czasu</h4>
                     <div class="space-y-4">
                         <div class="flex gap-4">

@@ -82,20 +82,11 @@
             <div class="lg:col-span-2 space-y-8">
                 
                 <!-- Hero Image -->
-                @if($portfolio->images && $portfolio->images->count() > 0)
+               @if($portfolio->image_desktop)
                 <div class="hero-image-container group">
-                    <img src="{{ asset('storage/' . $portfolio->images->first()->image_path) }}" 
-                         alt="{{ $portfolio->title }} Main Image" 
-                         class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex items-end p-8">
-                        <div>
-                            <span class="text-xs font-bold uppercase tracking-widest text-blue-400 mb-2 block">Zdjęcie główne</span>
-                            <h2 class="text-xl font-semibold text-white">{{ $portfolio->title }}</h2>
-                        </div>
-                    </div>
-                    <button class="absolute top-4 right-4 h-10 w-10 bg-black/40 backdrop-blur-md text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                        <i class="fa-solid fa-expand"></i>
-                    </button>
+                    <img src="{{ $portfolio->getImageUrl('desktop') }}" 
+                        alt="{{ $portfolio->title }} Main Image" 
+                        class="w-full h-full object-cover">
                 </div>
                 @endif
                 <div class="flex flex-wrap gap-2">

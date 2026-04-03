@@ -61,6 +61,10 @@ require __DIR__.'/auth.php';
 |--------------------------------------------------------------------------
 | Admin Routes (auth + admin)
 |--------------------------------------------------------------------------
+| Wszystkie trasy w tej grupie wymagają zalogowania (auth) oraz 
+| dodatkowej weryfikacji uprawnień administratora (middleware admin).
+| Dostępne pod adresem: TwojaDomena.pl/admin/...
+|
 */
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
 

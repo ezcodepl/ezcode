@@ -332,7 +332,7 @@
                     <div class="rounded-2xl overflow-hidden border border-slate-800 shadow-2xl">
                         <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80"
                             alt="Stanowisko pracy"
-                            class="w-full grayscale group-hover:grayscale-0 transition-all duration-700">
+                            class="w-full  transition-all duration-700">
                     </div>
                     <div
                         class="absolute -bottom-6 -right-6 md:right-10 md:bottom-10 bg-[#1e293b]/95 backdrop-blur-md p-6 rounded-2xl border border-slate-700 shadow-2xl flex items-center gap-4 z-20">
@@ -360,7 +360,7 @@
                     </p>
                     <div class="flex gap-16 border-t border-slate-800 pt-10">
                         <div>
-                            <div class="text-4xl font-bold text-white mb-1">5+</div>
+                            <div class="text-4xl font-bold text-white mb-1">15+</div>
                             <div class="text-sm text-slate-500">Lat Doświadczenia</div>
                         </div>
                         <div>
@@ -373,57 +373,87 @@
         </div>
     </section>
 
-    <!-- OFERTA (PRZYWRÓCONY ELEMENT) -->
-    <section class="py-24 bg-[#111827]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-brand font-bold uppercase text-xs tracking-widest mb-3">OFERTA</h2>
-                <h3 class="text-4xl font-bold text-white">Kompleksowe rozwiązania</h3>
+   <!-- OFERTA -->
+<section class="py-24 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Nagłówek sekcji -->
+        <div class="text-center mb-20">
+            <h3 class="text-4xl md:text-5xl font-bold tracking-tight text-white/95">
+                Kompleksowe rozwiązania
+            </h3>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20">
+            <!-- Strony WWW -->
+            <div class="flex flex-col items-start group">
+                <div class="w-12 h-12 bg-[#38bdf8]/10 rounded-2xl flex items-center justify-center text-[#38bdf8] mb-6">
+                    <i class="fa-solid fa-laptop-code "></i>
+                </div>
+                <h4 class="text-xl font-bold mb-4 text-white/90">Strony WWW</h4>
+                <p class="text-slate-400 text-[15px] leading-relaxed max-w-sm">
+                    Projektowanie nowoczesnych, szybkich i bezpiecznych stron internetowych dopasowanych do Twojego biznesu.
+                </p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Strony WWW -->
-                <div class="offer-card p-10 rounded-2xl">
-                    <div class="w-14 h-14 bg-brand/10 rounded-xl flex items-center justify-center text-brand mb-8">
-                        <i class="fa-solid fa-laptop-code text-2xl"></i>
-                    </div>
-                    <h4 class="text-xl font-bold text-white mb-4">Strony WWW</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        Projektowanie nowoczesnych, szybkich i bezpiecznych stron internetowych dopasowanych do Twojego
-                        biznesu.
-                    </p>
+
+            <!-- Sklepy Online -->
+            <div class="flex flex-col items-start group">
+                <div class="w-12 h-12 bg-[#27c93f]/10 rounded-2xl flex items-center justify-center text-[#27c93f] mb-6">
+                    <i class="fa-solid fa-cart-shopping "></i>
                 </div>
-                <!-- Sklepy Online -->
-                <div class="offer-card p-10 rounded-2xl">
-                    <div class="w-14 h-14 bg-brand/10 rounded-xl flex items-center justify-center text-brand mb-8">
-                        <i class="fa-solid fa-cart-shopping text-2xl"></i>
-                    </div>
-                    <h4 class="text-xl font-bold text-white mb-4">Sklepy Online</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        Wdrażanie funkcjonalnych platform e-commerce zintegrowanych z płatnościami i logistyką.
-                    </p>
+                <h4 class="text-xl font-bold mb-4 text-white/90">Sklepy Online</h4>
+                <p class="text-slate-400 text-[15px] leading-relaxed max-w-sm">
+                    Wdrażanie funkcjonalnych platform e-commerce zintegrowanych z płatnościami i logistyką.
+                </p>
+            </div>
+
+            <!-- Aplikacje bazodanowe -->
+            <div class="flex flex-col items-start group">
+                <div class="w-12 h-12 bg-[#9d4edd]/10 rounded-2xl flex items-center justify-center text-[#9d4edd] mb-6">
+                    <i class="fa-solid fa-database text-xl text-[#9d4edd]"></i>
                 </div>
-                <div class="offer-card p-10 rounded-2xl">
-                    <div class="w-14 h-14 bg-brand/10 rounded-xl flex items-center justify-center text-brand mb-8">
-                        <i class="fa-solid fa-cart-shopping text-2xl"></i>
-                    </div>
-                    <h4 class="text-xl font-bold text-white mb-4">Aplikacje bazodanowe</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        Wdrażanie funkcjonalnych platform e-commerce zintegrowanych z płatnościami i logistyką.
-                    </p>
+                <h4 class="text-xl font-bold mb-4 text-white/90">Aplikacje bazodanowe</h4>
+                <p class="text-slate-400 text-[15px] leading-relaxed max-w-sm">
+                    Projektowanie i wdrażanie dedykowanych systemów zarządzania danymi wspierających procesy biznesowe.
+                </p>
+            </div>
+
+            <!-- Branding -->
+            <div class="flex flex-col items-start group">
+                <div class="w-12 h-12 bg-blue-500/10 rounded-lg flex items-center justify-center text-blue-400 mb-6 transition-transform group-hover:scale-110">
+                    <i class="fa-solid fa-wand-magic-sparkles text-xl"></i>
                 </div>
-                <!-- Branding -->
-                <div class="offer-card p-10 rounded-2xl">
-                    <div class="w-14 h-14 bg-brand/10 rounded-xl flex items-center justify-center text-brand mb-8">
-                        <i class="fa-solid fa-wand-magic-sparkles text-2xl"></i>
-                    </div>
-                    <h4 class="text-xl font-bold text-white mb-4">Branding</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        Tworzenie logotypów oraz identyfikacji wizualnej, która wyróżni Twoją markę na tle konkurencji.
-                    </p>
+                <h4 class="text-xl font-bold mb-4 text-white/90">Branding</h4>
+                <p class="text-slate-400 text-[15px] leading-relaxed max-w-sm">
+                    Tworzenie logotypów oraz identyfikacji wizualnej, która wyróżni Twoją markę na tle konkurencji.
+                </p>
+            </div>
+
+            <!-- Konfiguracja Systemów -->
+            <div class="flex flex-col items-start group">
+                <div class="w-12 h-12 bg-[#ffbd2e]/10 rounded-2xl flex items-center justify-center text-[#ffbd2e] mb-6">
+                    <i class="fa-solid fa-gears text-xl"></i>
                 </div>
+                <h4 class="text-xl font-bold mb-4 text-white/90">Konfiguracja Systemów</h4>
+                <p class="text-slate-400 text-[15px] leading-relaxed mb-6 max-w-sm">
+                    Profesjonalna konfiguracja środowisk deweloperskich i produkcyjnych dopasowanych do specyfiki projektu.
+                </p>
+              
+            </div>
+
+            <!-- Serwery Linux -->
+            <div class="flex flex-col items-start group">
+                <div class="w-12 h-12 bg-[#ff5f56]/10 rounded-2xl flex items-center justify-center text-[#ff5f56] mb-6">
+                    <i class="fa-brands fa-linux text-xl"></i>
+                </div>
+                <h4 class="text-xl font-bold mb-4 text-white/90">Serwery Linux</h4>
+                <p class="text-slate-400 text-[15px] leading-relaxed mb-6 max-w-sm">
+                    Wdrażanie i zarządzanie serwerami WWW opartymi na dystrybucjach Linux (Ubuntu, Debian, CentOS).
+                </p>
+                
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- UMIEJĘTNOŚCI (Zaktualizowane o PostgreSQL, MSSQL, Python, Docker) -->
     <section id="umiejetnosci" class="py-24 bg-darkbg">
