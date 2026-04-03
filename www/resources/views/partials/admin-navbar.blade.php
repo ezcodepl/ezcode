@@ -24,6 +24,8 @@
         <a href="{{ url('/admin/portfolio') }}" class="text-sm font-medium text-slate-300 hover:text-brand transition-colors">Portfolio</a>
         <a href="{{ url('/admin/profile') }}" class="text-sm font-medium text-slate-300 hover:text-brand transition-colors">Profil</a>
 
+        <a href="{{ route('admin.settings') }}" class="text-sm font-medium text-slate-300 hover:text-brand transition-colors">Ustawienia</a>
+
         <form method="POST" action="{{ route('admin.logout') }}">
             @csrf
             <button type="submit" class="bg-brand hover:bg-brand-dark text-white px-6 py-2 rounded-full text-sm font-medium transition-all shadow-lg shadow-brand/25">
