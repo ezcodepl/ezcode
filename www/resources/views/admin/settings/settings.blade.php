@@ -187,5 +187,89 @@
                 </div>
             </div>
         </div>
+<script>
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
 
+            document.getElementById('tab-' + tab).classList.add('active');
+            document.getElementById('btn-' + tab).classList.add('active');
+        }
+
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            
+            const styles = type === 'success' ? 'bg-[#10b981]' : 'bg-[#00a3ff]';
+            
+            toast.className = `${styles} text-white px-8 py-5 rounded-2xl transform translate-y-full opacity-0 transition-all duration-500 flex items-center font-bold text-xs uppercase tracking-widest shadow-2xl`;
+            toast.innerHTML = `
+                <svg class="w-5 h-5 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                <span>${message}</span>
+            `;
+            
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.transform = 'translateY(0)';
+                toast.style.opacity = '1';
+            }, 10);
+            
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(20px)';
+                setTimeout(() => toast.remove(), 500);
+            }, 4000);
+        }
+
+        function simulateAction(startMsg, endMsg) {
+            showToast(startMsg, 'info');
+            setTimeout(() => showToast(endMsg, 'success'), 3000);
+        }
+
+        function confirmRestore(file) {
+            const modal = confirm(`SYSTEM RECOVERY MODE:\nCzy na pewno chcesz nadpisać aktualne dane serwisu plikiem "${file}"?`);
+            if(modal) {
+                simulateAction('Rozpakowywanie archiwum...', 'System został pomyślnie zsynchronizowany!');
+            }
+        }
+
+        function startUpdate() {
+            document.getElementById('update-idle').classList.add('hidden');
+            document.getElementById('update-progress').classList.remove('hidden');
+            
+            let progress = 0;
+            const bar = document.getElementById('progress-bar');
+            const percent = document.getElementById('progress-percent');
+            const status = document.getElementById('progress-status');
+            const log = document.getElementById('log-content');
+
+            const commands = [
+                { p: 15, s: "Pobieranie pakietów...", l: "> git checkout tags/v2.5.1" },
+                { p: 35, s: "Instalacja zależności...", l: "> composer install --no-dev --optimize-autoloader" },
+                { p: 60, s: "Migracja bazy danych...", l: "> php artisan migrate --force" },
+                { p: 85, s: "Generowanie cache...", l: "> php artisan optimize:clear" },
+                { p: 100, s: "Finalizacja...", l: "> systemctl restart php-fpm" }
+            ];
+
+            let step = 0;
+            const timer = setInterval(() => {
+                if(step < commands.length) {
+                    const c = commands[step];
+                    bar.style.width = c.p + '%';
+                    percent.innerText = c.p + '%';
+                    status.innerText = c.s;
+                    
+                    const p = document.createElement('p');
+                    p.innerHTML = `<span class="text-slate-600">[${new Date().toLocaleTimeString()}]</span> <span class="text-white">${c.l}</span>`;
+                    log.appendChild(p);
+                    log.scrollTop = log.scrollHeight;
+                    step++;
+                } else {
+                    clearInterval(timer);
+                    showToast('Aktualizacja zakończona!', 'success');
+                    setTimeout(() => location.reload(), 2000);
+                }
+            }, 1800);
+        }
+    </script>
 @endsection
