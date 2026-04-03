@@ -83,10 +83,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::post('posts/upload-image', [PostController::class, 'uploadImage'])->name('posts.uploadImage');
 
 
-    // Settings page
- Route::get('settings', function () {
-        return view('admin.settings.settings');
-    })->name('settings');
+Route::get('settings', [\App\Http\Controllers\Admin\SettingsController::class, 'index'])->name('settings');
 
 
     // Admin logout
