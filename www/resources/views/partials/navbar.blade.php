@@ -3,10 +3,12 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center">
                 <a href="{{ url('/') }}" class="flex items-center gap-2 group">
-                    <div class="w-9 h-9 bg-brand rounded-lg flex items-center justify-center text-white shadow-lg shadow-brand/20">
-                        <i class="fa-solid fa-code text-sm"></i>
-                    </div>
-                    <span class="font-heading font-bold text-xl tracking-tight text-white">ez<span class="text-brand">Code</span></span>
+                   <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-sky-500 rounded-xl flex items-center justify-center text-white shadow-lg shadow-sky-500/30">
+                    <i class="fas fa-terminal text-lg"></i>
+                </div>
+                <span class="text-2xl font-extrabold tracking-tight">ez<span class="text-sky-500">Code</span></span>
+            </div>
                 </a>
 
                 <nav class="hidden md:flex items-center space-x-8">

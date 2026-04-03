@@ -170,5 +170,6 @@
         selector: '.glightbox'
     });
 </script>
+
 </body>
 </html>

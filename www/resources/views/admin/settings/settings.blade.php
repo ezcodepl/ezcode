@@ -1,26 +1,70 @@
 @extends('layouts.admin')
-@section('title', 'ezCode - Podgląd posta: ' . $post->title)
+@section('title', 'ezCode - Panel administracyjny - ustawienia')
 
 @section('content')
-<!-- Nagłówek -->
+<style>
+    /* Style dla zakładek */
+    .tab-content {
+        display: none;
+    }
+    .tab-content.active {
+        display: block;
+    }
+    
+    .tab-btn {
+        position: relative;
+        color: #64748b; /* slate-500 */
+        border-bottom: 2px solid transparent;
+    }
+    .tab-btn.active {
+        color: #ffffff;
+        border-bottom-color: #00a3ff;
+    }
+
+    /* Style dla kart i szklanego efektu */
+    .glass-panel {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .stat-card {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .btn-neon-green {
+        background: #10b981;
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+        transition: all 0.3s ease;
+    }
+    .btn-neon-green:hover {
+        background: #059669;
+        box-shadow: 0 0 30px rgba(16, 185, 129, 0.4);
+    }
+</style>
+
+<div class="min-h-screen bg-[#0a0f1d] text-gray-300 font-sans selection:bg-[#00a3ff] selection:text-white pt-32">
+    <div id="toast-container" class="fixed bottom-10 right-10 z-50 flex flex-col gap-4"></div>
+
+    <div class="max-w-7xl mx-auto p-6 lg:p-12 space-y-8">
+        <!-- Nagłówek -->
         <div class="mb-10">
             <h1 class="text-4xl font-extrabold text-white tracking-tight">Konsola Administracyjna</h1>
             <p class="text-[#10b981] font-mono text-sm mt-2 uppercase tracking-widest">System & Data Integrity</p>
         </div>
 
         <!-- Nawigacja Zakładek -->
-        <div class="flex space-x-1 mb-8 border-b border-white/5">
-            <button onclick="switchTab('backup')" id="btn-backup" class="tab-btn active px-8 py-4 font-bold text-xs uppercase tracking-widest transition-all flex items-center">
+        <div class="flex space-x-8 mb-8 border-b border-white/5">
+            <button onclick="switchTab('backup')" id="btn-backup" class="tab-btn active pb-4 font-bold text-xs uppercase tracking-widest transition-all">
                 Kopia Zapasowa
             </button>
-            <button onclick="switchTab('update')" id="btn-update" class="tab-btn px-8 py-4 font-bold text-xs uppercase tracking-widest transition-all flex items-center">
+            <button onclick="switchTab('update')" id="btn-update" class="tab-btn pb-4 font-bold text-xs uppercase tracking-widest transition-all">
                 Aktualizacja WWW
             </button>
         </div>
 
         <!-- Treść: KOPIE ZAPASOWE -->
         <div id="tab-backup" class="tab-content active">
-            <!-- Kafelki podsumowujące (Przywrócone) -->
+            <!-- Kafelki podsumowujące -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                 <div class="stat-card p-6 rounded-2xl">
                     <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">Łączna wielkość</p>
@@ -74,10 +118,10 @@
                                         </td>
                                         <td class="px-8 py-6 text-right">
                                             <div class="flex justify-end space-x-3">
-                                                <button onclick="confirmRestore('full_backup_2023_10_25.zip')" class="p-2.5 bg-white/5 hover:bg-[#00a3ff] hover:text-white rounded-xl transition text-slate-400 shadow-sm">
+                                                <button onclick="confirmRestore('full_backup_2023_10_25.zip')" class="p-2.5 bg-white/5 hover:bg-[#00a3ff] hover:text-white rounded-xl transition text-slate-400">
                                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
                                                 </button>
-                                                <button class="p-2.5 bg-white/5 hover:bg-red-500/20 hover:text-red-500 rounded-xl transition text-slate-400 shadow-sm">
+                                                <button class="p-2.5 bg-white/5 hover:bg-red-500/20 hover:text-red-500 rounded-xl transition text-slate-400">
                                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                                 </button>
                                             </div>
@@ -187,89 +231,93 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
 <script>
-        function switchTab(tab) {
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    function switchTab(tab) {
+        // Ukrywamy wszystkie treści
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        // Odznaczamy wszystkie przyciski
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
 
-            document.getElementById('tab-' + tab).classList.add('active');
-            document.getElementById('btn-' + tab).classList.add('active');
+        // Aktywujemy wybraną treść i przycisk
+        document.getElementById('tab-' + tab).classList.add('active');
+        document.getElementById('btn-' + tab).classList.add('active');
+    }
+
+    function showToast(message, type = 'success') {
+        const container = document.getElementById('toast-container');
+        const toast = document.createElement('div');
+        
+        const styles = type === 'success' ? 'bg-[#10b981]' : 'bg-[#00a3ff]';
+        
+        toast.className = `${styles} text-white px-8 py-5 rounded-2xl transform translate-y-full opacity-0 transition-all duration-500 flex items-center font-bold text-xs uppercase tracking-widest shadow-2xl`;
+        toast.innerHTML = `
+            <svg class="w-5 h-5 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            <span>${message}</span>
+        `;
+        
+        container.appendChild(toast);
+        setTimeout(() => {
+            toast.style.transform = 'translateY(0)';
+            toast.style.opacity = '1';
+        }, 10);
+        
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateY(20px)';
+            setTimeout(() => toast.remove(), 500);
+        }, 4000);
+    }
+
+    function simulateAction(startMsg, endMsg) {
+        showToast(startMsg, 'info');
+        setTimeout(() => showToast(endMsg, 'success'), 3000);
+    }
+
+    function confirmRestore(file) {
+        if(confirm(`SYSTEM RECOVERY MODE:\nCzy na pewno chcesz nadpisać aktualne dane serwisu plikiem "${file}"?`)) {
+            simulateAction('Rozpakowywanie archiwum...', 'System został pomyślnie zsynchronizowany!');
         }
+    }
 
-        function showToast(message, type = 'success') {
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            
-            const styles = type === 'success' ? 'bg-[#10b981]' : 'bg-[#00a3ff]';
-            
-            toast.className = `${styles} text-white px-8 py-5 rounded-2xl transform translate-y-full opacity-0 transition-all duration-500 flex items-center font-bold text-xs uppercase tracking-widest shadow-2xl`;
-            toast.innerHTML = `
-                <svg class="w-5 h-5 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                <span>${message}</span>
-            `;
-            
-            container.appendChild(toast);
-            setTimeout(() => {
-                toast.style.transform = 'translateY(0)';
-                toast.style.opacity = '1';
-            }, 10);
-            
-            setTimeout(() => {
-                toast.style.opacity = '0';
-                toast.style.transform = 'translateY(20px)';
-                setTimeout(() => toast.remove(), 500);
-            }, 4000);
-        }
+    function startUpdate() {
+        document.getElementById('update-idle').classList.add('hidden');
+        document.getElementById('update-progress').classList.remove('hidden');
+        
+        let step = 0;
+        const bar = document.getElementById('progress-bar');
+        const percent = document.getElementById('progress-percent');
+        const status = document.getElementById('progress-status');
+        const log = document.getElementById('log-content');
 
-        function simulateAction(startMsg, endMsg) {
-            showToast(startMsg, 'info');
-            setTimeout(() => showToast(endMsg, 'success'), 3000);
-        }
+        const commands = [
+            { p: 15, s: "Pobieranie pakietów...", l: "git checkout tags/v2.5.1" },
+            { p: 35, s: "Instalacja zależności...", l: "composer install --no-dev --optimize-autoloader" },
+            { p: 60, s: "Migracja bazy danych...", l: "php artisan migrate --force" },
+            { p: 85, s: "Generowanie cache...", l: "php artisan optimize:clear" },
+            { p: 100, s: "Finalizacja...", l: "systemctl restart php-fpm" }
+        ];
 
-        function confirmRestore(file) {
-            const modal = confirm(`SYSTEM RECOVERY MODE:\nCzy na pewno chcesz nadpisać aktualne dane serwisu plikiem "${file}"?`);
-            if(modal) {
-                simulateAction('Rozpakowywanie archiwum...', 'System został pomyślnie zsynchronizowany!');
+        const timer = setInterval(() => {
+            if(step < commands.length) {
+                const c = commands[step];
+                bar.style.width = c.p + '%';
+                percent.innerText = c.p + '%';
+                status.innerText = c.s;
+                
+                const p = document.createElement('p');
+                p.innerHTML = `<span class="text-slate-600">[${new Date().toLocaleTimeString()}]</span> <span class="text-white">> ${c.l}</span>`;
+                log.appendChild(p);
+                log.parentElement.scrollTop = log.parentElement.scrollHeight;
+                step++;
+            } else {
+                clearInterval(timer);
+                showToast('Aktualizacja zakończona!', 'success');
+                setTimeout(() => location.reload(), 2000);
             }
-        }
-
-        function startUpdate() {
-            document.getElementById('update-idle').classList.add('hidden');
-            document.getElementById('update-progress').classList.remove('hidden');
-            
-            let progress = 0;
-            const bar = document.getElementById('progress-bar');
-            const percent = document.getElementById('progress-percent');
-            const status = document.getElementById('progress-status');
-            const log = document.getElementById('log-content');
-
-            const commands = [
-                { p: 15, s: "Pobieranie pakietów...", l: "> git checkout tags/v2.5.1" },
-                { p: 35, s: "Instalacja zależności...", l: "> composer install --no-dev --optimize-autoloader" },
-                { p: 60, s: "Migracja bazy danych...", l: "> php artisan migrate --force" },
-                { p: 85, s: "Generowanie cache...", l: "> php artisan optimize:clear" },
-                { p: 100, s: "Finalizacja...", l: "> systemctl restart php-fpm" }
-            ];
-
-            let step = 0;
-            const timer = setInterval(() => {
-                if(step < commands.length) {
-                    const c = commands[step];
-                    bar.style.width = c.p + '%';
-                    percent.innerText = c.p + '%';
-                    status.innerText = c.s;
-                    
-                    const p = document.createElement('p');
-                    p.innerHTML = `<span class="text-slate-600">[${new Date().toLocaleTimeString()}]</span> <span class="text-white">${c.l}</span>`;
-                    log.appendChild(p);
-                    log.scrollTop = log.scrollHeight;
-                    step++;
-                } else {
-                    clearInterval(timer);
-                    showToast('Aktualizacja zakończona!', 'success');
-                    setTimeout(() => location.reload(), 2000);
-                }
-            }, 1800);
-        }
-    </script>
+        }, 1500);
+    }
+</script>
 @endsection
