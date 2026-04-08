@@ -29,7 +29,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         //return redirect()->intended(route('/admin/posts', absolute: false));
-        return redirect()->intended('/admin/posts');
+        return redirect()->intended('/admin/dashboard');
     }
 
     /**

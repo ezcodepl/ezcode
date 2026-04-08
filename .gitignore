@@ -2,3 +2,4 @@
 /www/node_modules
 /www/.env
 /www/storage/*key
+._*
